@@ -1,0 +1,80 @@
+[
+    {
+      "id": 1,
+      "catagory": "01-Cat 1:Milk",
+      "product": "Milk-STD MILK-500 ML-",
+      "quantity": "3.0",
+      "uom": "Liter"
+    },
+    {
+      "id": 2,
+      "catagory": "01-Cat 1:Milk",
+      "product": "Milk-GOLDEN COW-SACHETS",
+      "quantity": "13.0",
+      "uom": "Liter"
+    },
+    {
+      "id": 3,
+      "catagory": "01-Cat 1:Milk",
+      "product": "Milk-STD GRAMES ML",
+      "quantity": "8.0",
+      "uom": "Kg"
+    },
+    {
+      "id": 4,
+      "catagory": "01-Cat 1:Milk",
+      "product": "Milk-STD MILK-500 ML-",
+      "quantity": "10.0",
+      "uom": "Pkts"
+    },
+    {
+      "id": 5,
+      "catagory": "01-Cat FCM 1:Milk",
+      "product": "Milk-STD MILK-500 ",
+      "quantity": "13.0",
+      "uom": "Kg"
+    },
+    {
+        "id": 6,
+        "catagory": "01-Cat FCM 1:Milk",
+        "product": "CURD-500 ML-",
+        "quantity": "17.0",
+        "uom": "Kg"
+      }
+      , {
+        "id": 7,
+        "catagory": "01-Cat FCM 1:Milk",
+        "product": "CURD-500 ML-",
+        "quantity": "17.0",
+        "uom": "Kg"
+      }
+      ,
+      {
+        "id": 8,
+        "catagory": "01-Cat FCM 1:Milk",
+        "product": "CURD-500 ML-",
+        "quantity": "17.0",
+        "uom": "Kg"
+      },
+      {
+        "id": 9,
+        "catagory": "01-Cat FCM 1:Milk",
+        "product": "CURD-500 ML-",
+        "quantity": "17.0",
+        "uom": "Kg"
+      },
+      {
+        "id": 10,
+        "catagory": "01-Cat FCM 1:Milk",
+        "product": "CURD-500 ML-",
+        "quantity": "17.0",
+        "uom": "Kg"
+      },
+      {
+        "id": 11,
+        "catagory": "01-Cat FCM 1:Milk",
+        "product": "CURD-500 ML-",
+        "quantity": "17.0",
+        "uom": "Kg"
+      }
+  ]

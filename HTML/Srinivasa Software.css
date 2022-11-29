@@ -1,0 +1,166 @@
+*{
+    margin:0px;
+    padding:0px;
+    }
+    #D{
+       position: relative;
+        height:700px;
+        width:1530px;
+    }
+    
+    header{
+       
+        width:100%;
+        height:100px;
+        background-color:rgb(241, 167, 6);
+        font-size: 2.5vw;
+        font-weight:800;
+        text-align: center;
+        
+        
+    }
+    header div{
+       padding: 7px 0;  
+    }
+    header div::first-letter{
+        font-size: 190%;
+        color:rgb(3, 100, 104);
+    }
+    header div::first-line{
+        color:rgb(241, 246, 247);  
+    }
+    nav ul{
+        list-style-type: none;
+        
+        overflow: hidden;
+        background-color: #333;
+    }
+    nav ul li{
+        float: left;
+    }
+    nav .tab{
+        float:left;
+        background-color: wheat;
+    }
+    nav ul li a{
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;	
+    }
+    nav li a:hover {
+        background-color: rgb(77, 74, 74);
+      }
+
+      header{
+        position:Sticky;
+        top: 0;
+      }
+      nav{
+          position:absolute;
+        position:Sticky;
+        top:14.2%;
+      }
+      .B1{
+        
+          width:100%;
+          height:600px;
+         
+      }
+    
+    aside{
+        float:left;
+       
+        height:600px;
+        width:200px;
+        background-color:rgb(22, 25, 34);
+    }
+    aside ul{
+        list-style-type: none;
+        
+        overflow: hidden;
+       
+    }
+    aside ul li a{
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+       
+       border-bottom: 2px dashed rgb(252, 248, 248);
+    }
+    aside ul li a:hover{
+        color:rgb(163, 90, 7);
+    }
+    .Fo ul li{
+        color:white;
+        text-align: center;
+    }
+    
+    #tab {
+        color:white;
+    }
+    
+    
+        /*
+        aside div{
+        position:relative;
+        width:200px;
+        height:150px;
+        background-color:white;
+        margin:12px 0px 0px 50px;
+        box-shadow:8px 8px 7px 2px rgba(255, 255, 255,.5);
+        transition:all 1s;
+        */
+        
+        
+        /*
+        aside div:hover{
+        transform:translate(80px,0px);	
+        }
+        */
+    
+   footer{
+       background-color: #2e2f3b;
+       width:100%;
+       height:360px;
+      
+   }
+
+    ul li{
+        list-style-type:none;
+    }
+    .f1{
+        float:left;
+        margin:0px;
+        padding: 19px;
+    }
+    
+    .f2{
+        
+        border-bottom:3px solid;
+        text-align:left;
+        color:white;
+        font-size:25px;
+    }
+    .f3 li{
+    color:rgb(155, 145, 145);
+    margin:0px 0px 0px 0px;	
+    font-family:Hometown;
+    }
+    .f4 li{
+    color:grey;
+    margin:0px 0px 0px 0px;		
+    }
+    .F1{
+     float:left;	
+    }
+    .F2{
+     float:left;	
+    }
+    .F3{
+     float:left;	
+    }			
+    

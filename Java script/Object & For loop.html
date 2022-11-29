@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>Object & For loop</title>
+  </head>
+  <body>
+      <p id="demo"></p>
+      <script>
+          const person = {
+  fname:"John",
+  lname:"Doe",
+  age:25
+  let de="";
+}; 
+for(var hi in person){
+  de+=hi+" "+person[hi];
+}
+document.getElementById("demo").innerHTML=de;
+      </script>
+
+<!-- This is another one -->
+<p id="demo1"></p>
+      <script>
+          let li="";
+    const myObj = {
+      name: "John",
+      age: 30,
+      cars: [
+    {name:"Ford", models:["Fiesta", "Focus", "Mustang"]},
+    {name:"BMW", models:["320", "X3", "X5"]},
+    {name:"Fiat", models:["500", "Panda"]}
+  ]
+  }
+for(let i in myObj.cars){
+        li +=myObj.cars[i].name+"<br>";
+        for(let j in myObj.cars[i].models){
+        li +=j+":"+myObj.cars[i].models[j]+"<br>";
+     }
+   }
+   
+ document.getElementById("demo1").innerHTML=li;
+      </script>
+
+
+                <!--Adding a Method to an Object-->
+
+      <p id="demo3"></p>
+      <script>
+          const fu = {
+         firstName: "John",
+        lastName: "Doe",
+            id: 5566,
+            func:function(a,b){
+
+         return this.firstName+ this.lastName+a+b;
+
+                     }
+};
+document.getElementById("demo3").innerHTML=fu["func"]();
+      </script>
+        
+      <div>
+        <p id="demo4"></p>
+        <h1>
+          Adding a Method to an Object
+      </h1>
+      </div>
+                     <!--Adding a Method to an Object-->
+
+      <script>
+         const fu1 = {
+         firstName: "Adding a Method",
+        lastName: "to an Object",
+            id: 5566,
+
+         } ;
+       fu1.name=function(){
+        return this.firstName+ this.lastName;
+       }
+       document.getElementById("demo3").innerHTML=fu1.name();
+      </script>
+      
+      
+  </body>
+</html>

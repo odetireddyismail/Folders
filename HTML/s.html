@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title></title>
+   <script>
+       function ismail(){
+            var name=document.getElementById("n1").value;
+            var email=document.getElementById("n2").value;
+            var pa=document.getElementById("para");
+                get_text=document.getElementById("para").value;
+                get_data=document.createTextNode(get_text);
+                li=document.createElement("p");
+                li.append_Child('get_dat');
+                pa.append_Child(li)
+
+            console.log(name,email);
+       }
+   </script>
+</head>
+<body>
+    name:<input type="text" id="n1"/>
+    name:<input type="text" id="n2"/>
+    <input type="submit" name="submit" onclick="ismail()"></input>
+
+    <p id="para">
+        
+    </p>
+    
+</body>
+
+</html>

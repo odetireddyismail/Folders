@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Ticket Booking</title>
+</head>
+
+<body>
+
+    <h1>Online Ticket Booking Application</h1>
+    <h2 id='total'>TotalTickets:</h2>
+    <form onSubmit='handleSubmit(event)'>
+        <label>Passenger Name</label>
+        <input type='text' id='name' name='name' placeholder="name" />
+        <div class='error name'></div>
+        <br />
+
+        <label>Passenger Age</label>
+        <input type='number' id='age' name='age' placeholder="age" />
+        <div class='error age'></div>
+        <br />
+
+        <label>Source</label>
+        <select id='source' name='source'>
+            <option></option>
+            <option>Bangalore</option>
+            <option>chennai</option>
+            <option>Hydrabad</option>
+            <option>Mumbai</option>
+            <option>pune</option>
+        </select>
+        <div class='error source'></div>
+        <br />
+        <label>Destination</label>
+        <select id='destination' name='destination'>
+            <option></option>
+            <option>Bangalore</option>
+            <option>chennai</option>
+            <option>Hydrabad</option>
+            <option>Mumbai</option>
+            <option>pune</option>
+        </select>
+        <div class='error destination'></div>
+        <br />
+        <label>Number of Tickets</label>
+        <input type='number' id='numberOfTickets' name='numberOfTickets' />
+        <div class='error tickets'></div>
+        <br />
+        <input type='submit' value='Book Ticket' />
+    </form>
+</body>
+<script type='text/javascript'>
+    let totalTickets = 0
+    const validation = () => {
+
+        let name = document.getElementById('name').value
+        let age = document.getElementById('age').value
+        let source = document.getElementById('source').value
+        let destination = document.getElementById('destination').value
+        let numberOfTickets = document.getElementById('numberOfTickets').value
+        if (name.trim() == '') {
+            setError('name cannot be empty', 'name')
+            return false
+        }
+        if (age.trim() == '') {
+            setError('enter the age', 'age')
+            return false
+        }
+        if (source == '') {
+            setError('select the source', 'source')
+            return false
+        }
+        if (destination == '') {
+            setError('select the destination', 'destination')
+            return false
+        }
+        if (numberOfTickets.trim() == '') {
+            setError('enter the number of tickets', 'numberOfTickets')
+            return false
+        }
+        else if (numberOfTickets > 5) {
+            setError('number of tickets should be less than 6', 'tickets')
+            return false
+        }
+    }
+
+    const setError = (message, field) => {
+        //clear existing validation
+        let errorBoxes = document.getElementsByClassName("error")
+        //console.log(errorBoxes)
+        for (var eb in errorBoxes) {
+            errorBoxes[eb].innerHTML = ""
+        }
+
+        //set validation
+        errorBoxes = document.getElementsByClassName(field)
+        for (var eb in errorBoxes) {
+            errorBoxes[eb].innerHTML = `${message}`
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (validation() == false) {
+
+        }
+        else {
+            const bookTicket = {
+                id: Number(new Date()),
+                passengerName: e.target.name.value,
+                passengerAge: e.target.age.value,
+                source: e.target.source.value,
+                destination: e.target.destination.value,
+                numberOfTickets: e.target.numberOfTickets.value
+            }
+
+            totalTickets += Number(e.target.numberOfTickets.value)
+            console.log(totalTickets)
+            const totTickets = document.getElementById('total')
+            totTickets.innerHTML = `${totalTickets}`
+            e.target.reset()
+        }
+        //console.log(bookTicket)
+
+    }
+
+
+</script>
+
+</html>
