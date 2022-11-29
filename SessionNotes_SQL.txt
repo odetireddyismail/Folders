@@ -1,0 +1,1529 @@
+
+SELECT Query Syntax:
+
+SELECT 	COL1,COL2,...ETC,
+	
+	[ EXPR1,EXPR2,..ETC ]
+	
+FROM 	TABLE1,TABLE2 ETC ..
+
+[WHERE]  	CONDITIONS 
+
+	[ GROUP BY COL1,COL2, ETC ]
+
+	[ HAVING  CONDITIONS ]
+
+	[ ORDER BY  COL1,COL2, ETC.. ];  32 COLUMNS
+
+
+SQL CLUASES: 	SELECT
+		FROM
+		WHERE
+		GROUP BY
+		HAVING 
+		ORDER BY
+
+
+Operators:
+
+select *from emp where job='MANAGER';
+
+select *from emp where ename='james';
+
+select *from emp where ename>'james';
+
+this command will be executed by basing on ASCII values. 
+
+select *from emp where hiredate='17-dec-80';
+
+we should use relational operators in databases for any type of data either numeric or strings and date ..rtc.
+
+logical operators:
+
+AND
+OR
+NOT
+
+select *from emp where sal>=1000 and sal<=3000;
+select *from emp where sal>1000 or sal<3000;
+select *from emp where sal>=1000 or sal<=3000;
+select *from emp where not sal=3000;
+
+Special operators:
+
+1) between	2) in(list)	3)is null	4) like
+
+select *from emp where sal between 1500 and 3000;
+
+select *from emp where sal not between 1500 and 3000;
+
+select *from emp where not sal between 1500 and 3000;
+
+select *from emp where deptno in(10,30);
+
+select *from emp where not deptno  in(10,30);
+
+select *from emp where job in('MANAGER','ANALYST','PRESIDENT');
+
+select *from emp where job is null;
+select *from emp where not job is null;
+select *from emp where comm is null;
+select *from emp where comm is not null;
+
+select *from emp where ename like 'j%';
+select *from emp where ename like 'SRI%';
+select *from emp where sal like 1250;
+select *from emp where hiredate like '%81';
+select *from emp where hiredate like '%Dec%';
+
+Demo tables:
+
+emp, dept
+
+8 columns,  dept 3 columns
+eno		deptno
+ename		dname
+job		loc  (4 rows)
+sal
+hiredate
+deptno
+mgr
+comm
+
+14 rows 
+
+
+Distinct clause:
+
+>select distinct job from emp;
+JOB
+---------
+ANALYST
+CLERK
+MANAGER
+PRESIDENT
+SALESMAN
+developer
+trainer
+
+7 rows selected.
+
+It is used to identify the values uniquely and values are displayed in alphabetic order and without duplicates.
+
+>select distinct deptno from emp;
+ DEPTNO
+-------
+     10
+     20
+     30
+>select empno,distinct job from emp;
+
+The query will not work before distinct clause is there any column or 
+field the query will not work. We are not supported to use any column.
+        
+
+SQL> select empno,distinct job from emp;
+select empno,distinct job from emp
+             *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select distinct job,empno from emp;
+
+JOB            EMPNO
+--------- ----------
+ANALYST         7788
+ANALYST         7902
+CLERK           7369
+CLERK           7876
+CLERK           7900
+CLERK           7934
+MANAGER         7566
+MANAGER         7698
+MANAGER         7782
+PRESIDENT       7839
+SALESMAN        7499
+SALESMAN        7521
+SALESMAN        7654
+SALESMAN        7844
+developer       1112
+trainer            1
+trainer         1111
+
+17 rows selected.
+
+>select distinct deptno,job from emp;
+
+  	 DEPTNO JOB
+---------- ---------
+        10 CLERK
+        10 MANAGER
+        10 PRESIDENT
+        10 developer
+        10 trainer
+        20 ANALYST
+        20 CLERK
+        20 MANAGER
+        30 CLERK
+        30 MANAGER
+        30 SALESMAN
+
+The query will give the information first department wise and 
+different jobs in that department and after next deptno and so on...
+
+>select distinct *from emp;
+
+It displays all the records without duplication if there ias any duplicate columns available in the table.
+
+ORDER BY;
+
+When ever you want to arrange the records in your own order and 
+reaaranged then you are going to be use order by clause. This arrangement will be doone virtually not permanantely.
+
+>select *from emp order by empno;
+
+SQL> select *from emp order by empno;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+         1 sample     trainer         7839 10-AUG-11      10450        200         10
+      1111 challa     trainer         7839 20-JUL-11       9950        500         10
+      1112 challa1    developer       7839 10-AUG-11      11950        200         10
+      7369 SMITH      CLERK           7902 17-DEC-80       1150                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       2550        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       2200        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2925                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       2200       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81     4512.5        200         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2400                    10
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3750                    20
+      7839 KING       PRESIDENT            17-NOV-81       6200        200         10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       2450          0         30
+      7876 ADAMS      CLERK           7788 12-JAN-83       1725        200         20
+      7900 JAMES      CLERK           7698 03-DEC-81       2100                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3700        200         20
+      7934 MILLER     CLERK           7782 23-JAN-82       1650                    10
+
+17 rows selected.
+
+
+Default result will be in asending order, alphabetic order.
+
+SQL> select *from emp order by ename;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7876 ADAMS      CLERK           7788 12-JAN-83       1725        200         20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       2550        300         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81     4512.5        200         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2400                    10
+      7902 FORD       ANALYST         7566 03-DEC-81       3700        200         20
+      7900 JAMES      CLERK           7698 03-DEC-81       2100                    30
+      7566 JONES      MANAGER         7839 02-APR-81       2925                    20
+      7839 KING       PRESIDENT            17-NOV-81       6200        200         10
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       2200       1400         30
+      7934 MILLER     CLERK           7782 23-JAN-82       1650                    10
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3750                    20
+      7369 SMITH      CLERK           7902 17-DEC-80       1150                    20
+      7844 TURNER     SALESMAN        7698 08-SEP-81       2450          0         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       2200        500         30
+      1111 challa     trainer         7839 20-JUL-11       9950        500         10
+      1112 challa1    developer       7839 10-AUG-11      11950        200         10
+         1 sample     trainer         7839 10-AUG-11      10450        200         10
+
+17 rows selected.
+
+SQL> select *from emp order by ename desc;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+         1 sample     trainer         7839 10-AUG-11      10450        200         10
+      1112 challa1    developer       7839 10-AUG-11      11950        200         10
+      1111 challa     trainer         7839 20-JUL-11       9950        500         10
+      7521 WARD       SALESMAN        7698 22-FEB-81       2200        500         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       2450          0         30
+      7369 SMITH      CLERK           7902 17-DEC-80       1150                    20
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3750                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1650                    10
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       2200       1400         30
+      7839 KING       PRESIDENT            17-NOV-81       6200        200         10
+      7566 JONES      MANAGER         7839 02-APR-81       2925                    20
+      7900 JAMES      CLERK           7698 03-DEC-81       2100                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3700        200         20
+      7782 CLARK      MANAGER         7839 09-JUN-81       2400                    10
+      7698 BLAKE      MANAGER         7839 01-MAY-81     4512.5        200         30
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       2550        300         30
+      7876 ADAMS      CLERK           7788 12-JAN-83       1725        200         20
+
+17 rows selected.
+
+SQL> select *from emp order by sal desc;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      1112 challa1    developer       7839 10-AUG-11      11950        200         10
+         1 sample     trainer         7839 10-AUG-11      10450        200         10
+      1111 challa     trainer         7839 20-JUL-11       9950        500         10
+      7839 KING       PRESIDENT            17-NOV-81       6200        200         10
+      7698 BLAKE      MANAGER         7839 01-MAY-81     4512.5        200         30
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3750                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3700        200         20
+      7566 JONES      MANAGER         7839 02-APR-81       2925                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       2550        300         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       2450          0         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2400                    10
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       2200       1400         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       2200        500         30
+      7900 JAMES      CLERK           7698 03-DEC-81       2100                    30
+      7876 ADAMS      CLERK           7788 12-JAN-83       1725        200         20
+      7934 MILLER     CLERK           7782 23-JAN-82       1650                    10
+      7369 SMITH      CLERK           7902 17-DEC-80       1150                    20
+
+17 rows selected.
+
+NOte:
+
+1) Is there any duplicate values then it gives based on memory address i.e. on  
+first reach and it will be going to be display first.
+
+2) q) In some where columns with null values then what will be the answer for this column by using order by?
+
+	First it will compare which records with contain values and arrange them 
+in the order after that null valued records based on memory allocation.
+
+
+SQL> select *from emp order by comm;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7844 TURNER     SALESMAN        7698 08-SEP-81       2450          0         30
+      7839 KING       PRESIDENT            17-NOV-81       6200        200         10
+      7698 BLAKE      MANAGER         7839 01-MAY-81     4512.5        200         30
+      7902 FORD       ANALYST         7566 03-DEC-81       3700        200         20
+      1112 challa1    developer       7839 10-AUG-11      11950        200         10
+         1 sample     trainer         7839 10-AUG-11      10450        200         10
+      7876 ADAMS      CLERK           7788 12-JAN-83       1725        200         20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       2550        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       2200        500         30
+      1111 challa     trainer         7839 20-JUL-11       9950        500         10
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       2200       1400         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2400                    10
+      7900 JAMES      CLERK           7698 03-DEC-81       2100                    30
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3750                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1650                    10
+      7369 SMITH      CLERK           7902 17-DEC-80       1150                    20
+      7566 JONES      MANAGER         7839 02-APR-81       2925                    20
+
+SQL> select *from emp order by comm desc;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7782 CLARK      MANAGER         7839 09-JUN-81       2400                    10
+      7566 JONES      MANAGER         7839 02-APR-81       2925                    20
+      7900 JAMES      CLERK           7698 03-DEC-81       2100                    30
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3750                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1650                    10
+      7369 SMITH      CLERK           7902 17-DEC-80       1150                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       2200       1400         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       2200        500         30
+      1111 challa     trainer         7839 20-JUL-11       9950        500         10
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       2550        300         30
+      7839 KING       PRESIDENT            17-NOV-81       6200        200         10
+      7698 BLAKE      MANAGER         7839 01-MAY-81     4512.5        200         30
+      1112 challa1    developer       7839 10-AUG-11      11950        200         10
+         1 sample     trainer         7839 10-AUG-11      10450        200         10
+      7876 ADAMS      CLERK           7788 12-JAN-83       1725        200         20
+      7902 FORD       ANALYST         7566 03-DEC-81       3700        200         20
+      7844 TURNER     SALESMAN        7698 08-SEP-81       2450          0         30
+
+17 rows selected.
+SQL> select deptno,empno,ename,job,sal from emp order by deptno,empno;
+
+    DEPTNO      EMPNO ENAME      JOB              SAL
+---------- ---------- ---------- --------- ----------
+        10          1 sample     trainer        10450
+        10       1111 challa     trainer         9950
+        10       1112 challa1    developer      11950
+        10       7782 CLARK      MANAGER         2400
+        10       7839 KING       PRESIDENT       6200
+        10       7934 MILLER     CLERK           1650
+        20       7369 SMITH      CLERK           1150
+        20       7566 JONES      MANAGER         2925
+        20       7788 SCOTT      ANALYST         3750
+        20       7876 ADAMS      CLERK           1725
+        20       7902 FORD       ANALYST         3700
+        30       7499 ALLEN      SALESMAN        2550
+        30       7521 WARD       SALESMAN        2200
+        30       7654 MARTIN     SALESMAN        2200
+        30       7698 BLAKE      MANAGER       4512.5
+        30       7844 TURNER     SALESMAN        2450
+        30       7900 JAMES      CLERK           2100
+
+17 rows selected.
+
+
+SQL> select deptno,empno,ename,job,sal from emp order by deptno,empno desc;
+
+    DEPTNO      EMPNO ENAME      JOB              SAL
+---------- ---------- ---------- --------- ----------
+        10       7934 MILLER     CLERK           1650
+        10       7839 KING       PRESIDENT       6200
+        10       7782 CLARK      MANAGER         2400
+        10       1112 challa1    developer      11950
+        10       1111 challa     trainer         9950
+        10          1 sample     trainer        10450
+        20       7902 FORD       ANALYST         3700
+        20       7876 ADAMS      CLERK           1725
+        20       7788 SCOTT      ANALYST         3750
+        20       7566 JONES      MANAGER         2925
+        20       7369 SMITH      CLERK           1150
+        30       7900 JAMES      CLERK           2100
+        30       7844 TURNER     SALESMAN        2450
+        30       7698 BLAKE      MANAGER       4512.5
+        30       7654 MARTIN     SALESMAN        2200
+        30       7521 WARD       SALESMAN        2200
+        30       7499 ALLEN      SALESMAN        2550
+
+17 rows selected.
+
+
+Sorting can be applicable for multiple columns.
+
+
+Note:
+
+and max number of sorting columns 
+are 32
+
+@
+UPDATE:
+
+update <tablename> set column1=newvalue/expression ,column2=newvalue/expr, ... [where condition];
+
+SQL> update emp set sal=4000;
+
+17 rows updated.
+SQL> select *from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81       4000        200         10
+      7698 BLAKE      MANAGER         7839 01-MAY-81       4000        200         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       4000                    10
+      7566 JONES      MANAGER         7839 02-APR-81       4000                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       4000       1400         30
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       4000        300         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       4000          0         30
+      7900 JAMES      CLERK           7698 03-DEC-81       4000                    30
+      7521 WARD       SALESMAN        7698 22-FEB-81       4000        500         30
+      7902 FORD       ANALYST         7566 03-DEC-81       4000        200         20
+      7369 SMITH      CLERK           7902 17-DEC-80       4000                    20
+      7788 SCOTT      ANALYST         7566 09-DEC-82       4000                    20
+      7876 ADAMS      CLERK           7788 12-JAN-83       4000        200         20
+      7934 MILLER     CLERK           7782 23-JAN-82       4000                    10
+      1111 challa     trainer         7839 20-JUL-11       4000        500         10
+      1112 challa1    developer       7839 10-AUG-11       4000        200         10
+         1 sample     trainer         7839 10-AUG-11       4000        200         10
+
+17 rows selected.
+
+> These are temporary upto you are using commit. you dont want to update you can roll back;
+
+> All the conditions we are using in the select statement we can use here also.
+
+sql> update emp set sal=sal+sal*0.25 where sal between 1500 and 3000; 
+sql> update emp set job='Trainer',sal=sal+500 where deptno=30;
+sql> update emp set job='SCRCLERK' where deptno=10 and job='CLERK';
+sql> update emp set job=null where job='SALESMAN';
+sql> update emp set job='TRainer' where job=null;
+Not executed bcz we didnt compare null values
+sql> update emp set job='Trainer' where job is null;  executed very well
+
+DELETE:
+delete from <tablename>[where condition(s)];
+
+sql> delete from emp where deptno=10;
+sql> delete from emp where sal between 1500 and 3000;
+
+NOTE:
+A record can not be deleted partially in any of the RDBMS concepts. 
+We want to do this we can use update command and put this as null values only.
+
+Q) create a table from existing table?
+
+sql> create table <tablename> as <Sql Query>;
+sql> create table sample_emp1 as select *from emp;
+
+SQL> create table sample_emp1 as select *from emp;
+
+Table created.
+
+SQL> desc sample_emp1;
+ Name                                                                               Null?    Type
+ ---------------------------------------------------------------------------------------------------
+ EMPNO                                                                              NOT NULL NUMBER(4)
+ ENAME                                                                                       VARCHAR2(10)
+ JOB                                                                                         VARCHAR2(9)
+ MGR                                                                                          NUMBER(4)
+ HIREDATE                                                                                      DATE
+ SAL                                                                                           NUMBER(7,2)
+ COMM                                                                                           NUMBER
+ DEPTNO                                                                              NOT NULL NUMBER(2)
+
+SQL> select *from sample_emp1;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81       6200        200         10
+      7698 BLAKE      MANAGER         7839 01-MAY-81     4512.5        200         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2400                    10
+      7566 JONES      MANAGER         7839 02-APR-81       2925                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       2200       1400         30
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       2550        300         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       2450          0         30
+      7900 JAMES      CLERK           7698 03-DEC-81       2100                    30
+      7521 WARD       SALESMAN        7698 22-FEB-81       2200        500         30
+      7902 FORD       ANALYST         7566 03-DEC-81       3700        200         20
+      7369 SMITH      CLERK           7902 17-DEC-80       1150                    20
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3750                    20
+      7876 ADAMS      CLERK           7788 12-JAN-83       1725        200         20
+      7934 MILLER     CLERK           7782 23-JAN-82       1650                    10
+      1111 challa     trainer         7839 20-JUL-11       9950        500         10
+      1112 challa1    developer       7839 10-AUG-11      11950        200         10
+         1 sample     trainer         7839 10-AUG-11      10450        200         10
+
+17 rows selected.
+
+Note:
+
+What ever the any valid query will give that result table will 
+be created by sql internally and it is going to be permananent;
+
+sql>create table sample_emp2 as select empno,ename,job,sal,deptno from emp;
+
+SQL> create table sample_emp2 as select empno,ename,job,sal,deptno from emp;
+
+Table created.
+
+SQL> select *from sample_emp2;
+
+     EMPNO ENAME      JOB              SAL     DEPTNO
+---------- ---------- --------- ---------- ----------
+      7839 KING       PRESIDENT       6200         10
+      7698 BLAKE      MANAGER       4512.5         30
+      7782 CLARK      MANAGER         2400         10
+      7566 JONES      MANAGER         2925         20
+      7654 MARTIN     SALESMAN        2200         30
+      7499 ALLEN      SALESMAN        2550         30
+      7844 TURNER     SALESMAN        2450         30
+      7900 JAMES      CLERK           2100         30
+      7521 WARD       SALESMAN        2200         30
+      7902 FORD       ANALYST         3700         20
+      7369 SMITH      CLERK           1150         20
+      7788 SCOTT      ANALYST         3750         20
+      7876 ADAMS      CLERK           1725         20
+      7934 MILLER     CLERK           1650         10
+      1111 challa     trainer         9950         10
+      1112 challa1    developer      11950         10
+         1 sample     trainer        10450         10
+
+17 rows selected.
+sql> create table sample_emp3 as select empno,ename,job,sal,comm,sal+comm,deptno from emp where deptno=10;
+
+Note:
+SQL> create table sample_emp3 as select empno,ename,job,sal,comm,sal+comm,deptno from emp where dept
+no=10;
+create table sample_emp3 as select empno,ename,job,sal,comm,sal+comm,deptno from emp where deptno=10
+                                                               *
+ERROR at line 1:
+ORA-00998: must name this expression with a column alias
+
+SQL> create table sample_emp3 as select empno,ename,job,sal,comm,sal+comm newsal,deptno from emp where deptno=30;
+
+Note: We can not have a chance to change datatypes but we have a chance to change the new names for columns as our wish.
+> Valid sql query means starts with select statement.
+
+sql> create table sample_emp4(eno,name,post,salary,deptno) as select empno,ename,job,sal,deptno from emp where deptno=20;
+Table created.
+
+SQL> select *from sample_emp4;
+
+       ENO NAME       POST          SALARY     DEPTNO
+---------- ---------- --------- ---------- ----------
+      7566 JONES      MANAGER         2955         20
+      7902 FORD       ANALYST         3730         20
+      7369 SMITH      CLERK           1180         20
+      7788 SCOTT      ANALYST         3780         20
+      7876 ADAMS      CLERK           1755         20
+
+Q) We want a table and we need not copy any records that means only create structure?
+
+sql>create table sample_emp5 as select *from emp where comm=null;
+sql>create table sample_emp6 as select *from emp where sal>=3000 and sal<=3000;
+  etc...
+we can use false conditions which are not going to be select any records;
+
+SQL> select *from sample_emp5;
+
+no rows selected
+
+SQL> desc sample_emp5;
+ Name                                                                                             Null?    Type
+ ---------------------------------------------------------------------------------------------------
+ EMPNO                                                                                           NOT NULL NUMBER(4)
+ ENAME                                                                                                    VARCHAR2(10)
+ JOB                                                                                                      VARCHAR2(9)
+ MGR                                                                                                      NUMBER(4)
+ HIREDATE                                                                                                  DATE
+ SAL                                                                                                      NUMBER(7,2)
+ COMM                                                                                                     NUMBER
+ DEPTNO                                                                                          NOT NULL NUMBER(2)
+
+Q) We can insert values from onetable to another table? [Possible]
+
+>insert into <dtable> select *from emp;
+>insert into sample_emp5 select *from emp;
+SQL> insert into sample_emp5 select *from emp;
+
+17 rows created.
+
+SQL> select *from sample_emp5;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81       6230        200         10
+      7698 BLAKE      MANAGER         7839 01-MAY-81     4542.5        200         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2430                    10
+      7566 JONES      MANAGER         7839 02-APR-81       2955                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       2230       1400         30
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       2580        300         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       2480          0         30
+      7900 JAMES      CLERK           7698 03-DEC-81       2130                    30
+      7521 WARD       SALESMAN        7698 22-FEB-81       2230        500         30
+      7902 FORD       ANALYST         7566 03-DEC-81       3730        200         20
+      7369 SMITH      CLERK           7902 17-DEC-80       1180                    20
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3780                    20
+      7876 ADAMS      CLERK           7788 12-JAN-83       1755        200         20
+      7934 MILLER     CLERK           7782 23-JAN-82       1680                    10
+      1111 challa     trainer         7839 20-JUL-11       9980        500         10
+      1112 challa1    developer       7839 10-AUG-11      11980        200         10
+         1 sample     trainer         7839 10-AUG-11      10480        200         10
+
+17 rows selected.
+
+Note:
+
+In this concept the two tables column names are different but data types are same,
+ we can very much insert the values from one table to another 
+table and provided that number of columns should be equal.
+
+
+ALTER:
+
+We want to change structure of the database table or we want to change the 
+data type of columns also we can add and remove the columns we need alter command.
+
+it is a DDL command;
+
+>alter <tablename> modify(col1 datatype(size));
+>alter demo modify ename varchar2(30);
+>alter demo modify (ename varchar2(30),sal number(7,2));
+>alter table <tablename> add(col1 datatype(size),...);
+It is not possible to insert new columns in between existing columns we can add at the end of the previous columns;
+> alter table<tablename> rename to newname;
+>alter table<tablename> rename column<oldname>to <newname>;
+it is not possible to rename more than one column;
+>alter table <tablename> drop(col1,col2...);
+>alter table demo drop(job);
+
+>drop table <tablename>;
+>drop table demo;
+>
+purge recyclebin; want to delete zunk values 
+>drop table<tablename> purge;
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ group by clause
+SQL> select vsize('training') from dual;
+
+VSIZE('TRAINING')
+-----------------
+                8
+
+SQL> select vsize('challa') from dual;
+
+VSIZE('CHALLA')
+---------------
+              6
+
+SQL> select sum(sal) from emp group by deptno;
+
+  SUM(SAL)
+----------
+     28910
+     50000
+   35542.5
+
+SQL> select deptno,sum(sal) from emp group by deptno;
+
+    DEPTNO   SUM(SAL)
+---------- ----------
+        10      28910
+        20      50000
+        30    35542.5
+
+SQL> select deptno,job,count(*),sum(sal) from emp group by deptno,job;
+
+    DEPTNO JOB         COUNT(*)   SUM(SAL)
+---------- --------- ---------- ----------
+        10 CLERK              1       6680
+        10 PRESIDENT          1       7230
+        10 srmanager          1      15000
+        20 CLERK              3      22935
+        20 ANALYST            2      15065
+        20 MANAGER            1       6000
+        20 SrTrainee          1       6000
+        30 CLERK              1       6000
+        30 MANAGER            1     5542.5
+        30 SALESMAN           4      24000
+
+10 rows selected.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+1) Horizontal Fragmentation
+2) Vertical Fragmentation
+
+a) Using Set Operations we can able to access the data from two or the more tables i.e. 
+when records are placed horizontally.
+b) If these are in vertical model there we have to use joins.
+
+Set Operations:
+
+The set operations are a) union, union all b) intersect c) minus
+
+> select *from emp union select *from emp1;
+> select *from emp1 union select *from emp2 union select *from emp3;
+> select *from emp1 union all select *from emp;
+	we want to get all the records from the both tables 
+then we use union all and it display with duplicates also.
+	If we want only common records then we use intersect
+>select *from emp1 intersect select *from emp2;
+
+SQL> select *from emp1 intersect select *from emp2;
+
+     EMPNO ENAME      JOB              MGR        SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902      10180                    20
+      7566 JONES      MANAGER         7839       6000                    20
+      7666 JACK       CLERK           7698       6000        300         20
+      7788 SCOTT      SrTrainee       7566       6000                    20
+      7876 ADAMS      CLERK           7788       6755        200         20
+      7902 FORD       ANALYST         7566       6000        200         20
+      7950 BOND       ANALYST         7782       9065                    20
+
+7 rows selected.
+
+> select *from emp1 minus select *from emp2;
+
+SQL>  select *from emp1 minus select *from emp2;
+
+     EMPNO ENAME      JOB              MGR        SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- ---------- ---------- ----------
+      7499 ALLEN      SALESMAN        7698       6000        300         30
+      7521 WARD       SALESMAN        7698       6000        500         30
+      7654 MARTIN     SALESMAN        7698       6000       1400         30
+      7698 BLAKE      MANAGER         7839     5542.5        200         30
+      7782 CLARK      srmanager       7839      15000                    10
+      7839 KING       PRESIDENT                  7230        200         10
+      7844 TURNER     SALESMAN        7698       6000          0         30
+      7900 JAMES      CLERK           7698       6000                    30
+      7934 MILLER     CLERK           7782       6680                    10
+
+9 rows selected.
+
+Union and union all & intersect are fallows commutative property but minus does not fallow commutative property.
+
+A-(A-B)
+B-(B-A)
+
+@@@@@@@@@@@@@@@
+Consider one example emp4 having 8 columns
+emp5 having 5 columns then
+SQL> select *from emp4 union select *from emp5;
+ It is not work because if it possible means output is in the
+ structure of cobination of horizontal and vertical lines. 
+Al ready we know that oracle displays the results in 2 Dimensional values. i.e. equal number of rows and columns.
+
+Iy you want to do so means we can choose selective columns and using union i.e fallowing way.
+
+> select empno,ename,job,sal,deptno from emp union select *from emp4;
+
+SQL>  select empno,ename,job,sal,deptno from emp union select *from emp4;
+
+     EMPNO ENAME      JOB              SAL     DEPTNO
+---------- ---------- --------- ---------- ----------
+      7369 SMITH      CLERK          10180         20
+      7499 ALLEN      SALESMAN        6000         30
+      7521 WARD       SALESMAN        6000         30
+      7566 JONES      MANAGER         6000         20
+      7654 MARTIN     SALESMAN        6000         30
+      7666 JACK       CLERK           6000         20
+      7698 BLAKE      MANAGER       5542.5         30
+      7782 CLARK      srmanager      15000         10
+      7788 SCOTT      SrTrainee       6000         20
+      7839 KING       PRESIDENT       7230         10
+      7844 TURNER     SALESMAN        6000         30
+      7876 ADAMS      CLERK           6755         20
+      7900 JAMES      CLERK           6000         30
+      7902 FORD       ANALYST         6000         20
+      7934 MILLER     CLERK           6680         10
+      7950 BOND       ANALYST         9065         20
+
+16 rows selected.
+
+Note:`
+
+If column names are different but datatypes are equal then 
+we apply union means the query will be work but the column headings are off first query table structure.
+
+	This approach will work for all the set operations and there is know problem with the size of the columns.
+Note:
+As long as the data types of similar then only the set operations will work but not they didn't work.
+
+If we want to do so means we can convert the data types
+ of columns of tables in the query temperarly i.e. numerics may be changed  
+to string type there we use to_char function etc.
+
+> select to_char(empno),ename,job,sal,deptno from emp4 unoin select *from emp6;
+emp6:
+
+empno varchar2(6)
+ename
+job
+sal
+deptno
+
+>select *from emp6 union select to_char(empno),ename,job,sal,deptno from emp4;
+
+
+Vertical Fragmentation:
+
+Joins:
+
+When ever we use two tables in oracle query it will perform carteisian product 
+operation and display the records i.e cross product of records.
+i.e. M X N =MN Records
+
+sql> select *from emp,dept;
+To eliminate this concept we can use a concept of joins.
+
+Joins are classified into different types basically three types.
+
+1) Simple Joins
+2) Self Joins
+3) Outer Joins
+
+Join is a condition or predicate used in a query statement to project the required rows from the cartesian product.
+Simple Joins:
+
+A simple join is a condition used to project all the associated rows from the cartesian product.
+
+Equi Join: When a join condition is based on the relational operator = is called Equi join
+
+Non Equi Join: When a join condition is based on the relational operators other than equal 
+to operator when it is called a non equi join
+
+Self Join:
+When a relation or table is joined to itself then it is called as the self join.
+
+Outer join:
+
+When a join condition is used to project all the associated and also non associated 
+rows from the cartesian product then it is called an outer join.
+
+> Left Outer Join
+> Right Outer Join
+> Full Outer join
+
+>select *from emp,dept where emp.deptno=dept.deptid;
+SQL> select *from emp,dept where emp.deptno=dept.deptid;
+
+     EMPNO EMPNAME    JOB              MGR        SAL       COMM     DEPTNO   PHONE_NO     DEPTID DNAME          LOC
+---------- ---------- --------- ---------- ---------- ---------- ---------- ---------- ---------- --
+      7934 MILLER     CLERK           7782       6680                    10                    10 ACCOUNTING     NEW YORK
+      7782 CLARK      srmanager       7839      15000                    10                    10 ACCOUNTING     NEW YORK
+      7839 KING       PRESIDENT                  7230        200         10                    10 ACCOUNTING     NEW YORK
+      7950 BOND       ANALYST         7782       9065                    20                    20 RESEARCH       DALLAS
+      7666 JACK       CLERK           7698       6000        300         20                    20 RESEARCH       DALLAS
+      7876 ADAMS      CLERK           7788       6755        200         20                    20 RESEARCH       DALLAS
+      7788 SCOTT      SrTrainee       7566       6000                    20                    20 RESEARCH       DALLAS
+      7369 SMIT       CLERK           7902      10180                    20                    20 RESEARCH       DALLAS
+      7902 FORD       ANALYST         7566       6000        200         20                    20 RESEARCH       DALLAS
+      7566 JONES      MANAGER         7839       6000                    20                    20 RESEARCH       DALLAS
+      7521 WARD       SALESMAN        7698       6000        500         30                    30 SALES          CHICAGO
+      7900 JAMES      CLERK           7698       6000                    30                    30 SALES          CHICAGO
+      7844 TURNER     SALESMAN        7698       6000          0         30                    30 SALES          CHICAGO
+      7499 ALLEN      SALESMAN        7698       6000        300         30                    30 SALES          CHICAGO
+      7654 MARTIN     SALESMAN        7698       6000       1400         30                    30 SALES          CHICAGO
+      7698 BLAKE      MANAGER         7839     5542.5        200         30                    30 SALES          CHICAGO
+
+16 rows selected.
+
+> select *from emp,dept where emp.deptno !=dept.deptid;
+> select *from emp,dept where emp.deptno=dept.deptid and deptno in (20,30);
+> select *from emp,dept where emp.deptno=dept.deptid and deptno in (20,30) order by deptno;
+> Table alias:
+
+> select empno,empname,job,sal,d.deptid,dname,loc from emp e, dept d where e.deptno=d.deptid and d.deptid in (20,30) order by d.deptid;
+
+
+> select empno,empname,job,sal,d.* from emp e,dept d where e.deptno=d.deptid and d.deptid in (20,30) order by d.deptid; 
+
+> Find the list of all the employee's from emp table whose salary is >jones salary?
+
+>select *from emp where empname='JONES';
+> select *from emp where sal>6600;
+
+Here but we need a optimal solution by using a single query
+
+Self Join:
+
+> select e1.empname,e1.empno,e1.job,e1.sal,e1.deptno 
+from emp e1,emp e2 where e2.empname='JONES' and e1.sal>e2.sal;
+
+
+>select s.* from emp s,emp b where s.mgr=b.empno and s.sal>b.sal;
+> select s.empno,s.empname,s.job,s.sal,s.deptno,b.empno,b.empname,b.sal from emp s,emp b
+ where s.mgr=b.empno and s.sal>b.sal;
+
+Outer Join:
+
+SQL> select *from dept;
+
+    DEPTID DNAME          LOC
+---------- -------------- -------------
+        10 ACCOUNTING     NEW YORK
+        20 RESEARCH       DALLAS
+        30 SALES          CHICAGO
+        40 OPERATIONS     BOSTON
+>select d.*,empno,empname,job,sal,deptno from emp e,dept d where e.deptno=d.deptid;
+
+> select d.*,empno,empname,job,sal,deptno from emp e,dept d where e.deptno(+)=d.deptid;
+> select d.*,e.* from emp e,dept d where e.deptno(+)=deptid;
+> select d.*,empno,empname,job,sal,deptno from emp e,dept d where e.deptno=d.deptid(+);
+There is no concept of full outer join but we can use union in between two left and right outer joins
+
+>select d.*,empno,empname,job,sal,deptno from emp e,dept d
+ where e.deptno(+)=d.deptid union 
+select d.*,empno,empname,job,sal,deptno from emp e,dept d where e.deptno=d.deptid(+);
+
+
+Sub Query's:
+
+>select *from emp where sal>(select sal from emp where empname='JONES');
+> select *from emp where job=(select job from emp where empname='BLACK');
+> select *from emp where deptno=20 and job in (select distinct job from emp 
+where deptno=(select deptno from dept where dname='sales'));
+
+
+NOTE:
+
+Correlated Subquery:
+In this the result of outer join will be work as a condition to inner join
+>select *from emp x where &priority=
+	(select count(distinct sal) from emp y where x.sal<y.sal);
+
+
+NOTE:
+
+>select rownum,rowid,empno,empname from emp;
+
+ ROWNUM ROWID                   EMPNO EMPNAME
+------- ------------------ ---------- ----------
+      1 AAANtoAAEAAAQcMAAA       7839 KING
+      2 AAANtoAAEAAAQcMAAB       7698 BLAKE
+      3 AAANtoAAEAAAQcMAAC       7782 CLARK
+      4 AAANtoAAEAAAQcMAAD       7566 JONES
+      5 AAANtoAAEAAAQcMAAE       7654 MARTIN
+      6 AAANtoAAEAAAQcMAAF       7499 ALLEN
+      7 AAANtoAAEAAAQcMAAG       7844 TURNER
+      8 AAANtoAAEAAAQcMAAH       7900 JAMES
+      9 AAANtoAAEAAAQcMAAI       7521 WARD
+     10 AAANtoAAEAAAQcMAAJ       7902 FORD
+     11 AAANtoAAEAAAQcMAAK       7369 SMIT
+     12 AAANtoAAEAAAQcMAAL       7788 SCOTT
+     13 AAANtoAAEAAAQcMAAM       7876 ADAMS
+     14 AAANtoAAEAAAQcMAAN       7934 MILLER
+     15 AAANtoAAEAAAQcMAAO       7666 JACK
+     16 AAANtoAAEAAAQcMAAP       7950 BOND
+
+These are internal columns are called as pseduo columns. 
+They are not definable but these are internal values.
+Rownums these are not permananent values they are not static they are dynamic values 
+but row ids are static.
+		
+> select *from (select *from emp order by sal desc ) where rownum<=5;
+
+
+> DataBase Objects:
+
+SEQUENCE:
+
+Sequence is a database object defined on the server which generates the sequential numeric values for a column of the base table.
+
+Syntax:
+
+create sequence <sequence_name>
+		[start with n]
+		[increment by n]
+		[minvalue n]
+		[maxvalue n]
+		[cycle]
+		[cache];
+
+Default Cycle value no;
+Default cache value 20;
+Default start with 1;
+Default increment by 1;
+Default min value 1;
+Default max value e27;
+
+> when we want to insert values into table first of all we get sequence from the server and after enter values 
+> create sequence sq_1;
+SQL> create sequence sq_1;
+
+Sequence created.
+> SQL> select *from user_sequences;
+
+SEQUENCE_NAME                   MIN_VALUE  MAX_VALUE INCREMENT_BY C O CACHE_SIZE LAST_NUMBER
+------------------------------ ---------- ---------- ------------ - - ---------- -----------
+USER_ID_SEQUENCE                        1 1.0000E+27           10 N N         20       54521
+VI                                      1         20            5 N N         20          21
+MKSEQ                                 100        700          200 Y N          0         100
+LKSEQ                                   1        500            1 Y N          0           5
+CUSTID                                  1 1.0000E+27            1 N N          0         109
+SEQ1                                    1 1.0000E+27            1 N N         20          21
+
+> it is a catalog which contains all the metadata about sequnces;
+
+>	Insert into demo values(&empno,’&ename’,’&job’,&sal,&deptno);
+>	Insert into demo values(sq_1.nextval,’&ename’,’&job’,&sal,&deptno);
+
+It directly prompts for only ename not for empno.
+The moment we are inserting records and when cache have values means server can not send sequence values. After completing the cache memory server will send the values.
+
+Note:
+Whenever we are  enter not a proper values, 
+after that mistakes we are try to insert records.
+ These records are entered into the table 
+but here is a problem of sequence missing and next number will miss.
+
+1)	Column value exceeds size sequence miss
+
+2)	Data type mismatch sequence will 
+	not miss while re insert as the command will 
+	be processed the sequence can be utilized.
+
+3)	The command itself rejected then the sequence will not be utilized
+	Insert into stud111 values(sq_1.nextval,’&name’,&marks);
+
+Never try to use the same sequence for more than one table. 
+We have an option of currval
+
+>select sq_11.currval from dual;
+
+>create sequence sq_2 start with 10 increment by 10 maxvalue 100;
+
+>create sequence sq_3 start with 10 increment by 10 minvalue 10 maxvalue 100 cycle cache 9;
+
+>alter sequence sq_2 cycle;
+
+Number to cache must be less than one cycle;
+
+>alter sequence sq_2 cycle cache 9;
+Sequence altered;
+
+>alter sequence sq_2 minvalue 10;
+
+
+Synonyms:
+
+> Synonyms is a data base object defined on the data base server used as the alias name for a database table.
+> Synonyms are defined on the base tables to convienently execute the query's using a short name.
+> Synonyms are considered as the virtual tables as they will not occupy any space on the storage.
+> Using Synonyms a user can execute all the dml commands on the base tables.
+> A table can have any number of Synonyms but two tables can not have the same Synonym name.
+
+> Syntax:
+create synonym<s_name> for <table name>;
+Eg:
+create synonym emp_master for emp;
+
+SQL> select *from emp_master;
+
+     EMPNO EMPNAME    JOB              MGR        SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- ---------- ---------- ----------
+      7839 KING       PRESIDENT                   100        200         10
+      7698 BLAKE      MANAGER         7839        100        200         30
+      7782 CLARK      srmanager       7839        100                    10
+      7566 JONES      MANAGER         7839        100                    20
+      7654 MARTIN     SALESMAN        7698        100       1400         30
+      7499 ALLEN      SALESMAN        7698        100        300         30
+      7844 TURNER     SALESMAN        7698        100          0         30
+      7900 JAMES      CLERK           7698        100                    30
+      7521 WARD       SALESMAN        7698        100        500         30
+      7902 FORD       ANALYST         7566        100        200         20
+      7369 SMIT       CLERK           7902        100                    20
+      7788 SCOTT      CLERK           7566        100                    20
+      7876 ADAMS      CLERK           7788        100        200         20
+      7934 MILLER     CLERK           7782        100                    10
+      7666 JACK       CLERK           7698        100        300         20
+      7950 BOND       ANALYST         7782      15000                    20
+        23 ss         hr                32      453.5        300         20
+
+17 rows selected.
+
+SQL> desc emp_master;
+ Name                                                                                                  Null?    Type
+ ---------------------------------------------------------------------------------------------------
+ EMPNO                                                                                                 NOT NULL NUMBER(4)
+ EMPNAME                                                                                                      VARCHAR2(10)
+ JOB                                                                                                           VARCHAR2(9)
+ MGR                                                                                                            NUMBER(4)
+ SAL                                                                                                            NUMBE(7,2)
+ COMM                                                                                                    	 NUMBER
+ DEPTNO                                                                                                NOT NULL NUMBER(2)
+
+SQL> delete from emp where empno=23;
+
+1 row deleted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select *from emp_master;
+
+     EMPNO EMPNAME    JOB              MGR        SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- ---------- ---------- ----------
+      7839 KING       PRESIDENT                   100        200         10
+      7698 BLAKE      MANAGER         7839        100        200         30
+      7782 CLARK      srmanager       7839        100                    10
+      7566 JONES      MANAGER         7839        100                    20
+      7654 MARTIN     SALESMAN        7698        100       1400         30
+      7499 ALLEN      SALESMAN        7698        100        300         30
+      7844 TURNER     SALESMAN        7698        100          0         30
+      7900 JAMES      CLERK           7698        100                    30
+      7521 WARD       SALESMAN        7698        100        500         30
+      7902 FORD       ANALYST         7566        100        200         20
+      7369 SMIT       CLERK           7902        100                    20
+      7788 SCOTT      CLERK           7566        100                    20
+      7876 ADAMS      CLERK           7788        100        200         20
+      7934 MILLER     CLERK           7782        100                    10
+      7666 JACK       CLERK           7698        100        300         20
+      7950 BOND       ANALYST         7782      15000                    20
+
+16 rows selected.
+
+>create synonym d1 for dept;
+>select *from tab;
+
+Note:
+Over a period of time we forgot that on what table we are giving synonyms and on which they are defined
+
+SQL> select *from user_synonyms;
+
+SYNONYM_NAME                   TABLE_OWNER                    TABLE_NAME
+------------------------------ ------------------------------ ------------------------------
+DB_LINK
+----------------------------------------------------------------------------------------------------
+EMP_MASTER                     TRAINING                       EMP
+
+> Even if you delete the table permanately then also synonyms will exist;
+
+SQL> create table ch123(empno number);
+
+Table created.
+
+SQL> desc ch123;
+ Name                                                                                                  Null?    Type
+ ---------------------------------------------------------------------------------------------------
+ EMPNO                                                                                                          NUMBER
+> create synonym ch_1 for ch123;
+SQL> create synonym ch_1 for ch123;
+
+Synonym created.
+
+SQL> desc ch_1;
+ Name                                                                                                  Null?    Type
+ ---------------------------------------------------------------------------------------------------
+ EMPNO                                                                                                          NUMBER
+SQL> drop table ch123;
+
+Table dropped.
+
+SQL> commit;
+
+Commit complete.
+
+
+SQL> select *from user_synonyms;
+SYNONYM_NAME                   TABLE_OWNER                    TABLE_NAME
+------------------------------ ------------------------------ ------------------------------
+DB_LINK
+----------------------------------------------------------------------------------------------------
+
+
+EMP_MASTER                     TRAINING                       EMP
+
+
+CH_1                           TRAINING                       CH123
+
+SQL> select *from ch_1;
+select *from ch_1
+             *
+ERROR at line 1:
+ORA-00980: synonym translation is no longer valid
+
+> If we again create a table with ch123 with new alterations the synonyms are assaigned to this table. And work as like previous
+
+
+SQL>  create table ch123(empno number);
+
+Table created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> desc ch_1;
+ Name                                                                                                  Null?    Type
+ ---------------------------------------------------------------------------------------------------
+ EMPNO                                                                                                          NUMBER
+
+SQL> insert into ch_1 values(1111);
+
+1 row created.
+
+SQL> select *from ch123;
+
+     EMPNO
+----------
+      1111
+
+
+Q) Modify base table with synonym name?
+i.e change datatype, column etc;
+
+
+delete synonym:
+
+>drop synonym ch_1;
+SQL> drop synonym ch_1;
+
+Synonym dropped.
+
+Note:
+
+>create synonym d1 for demo;
+
+
+SQL> select *from demo;
+select *from demo
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+>>> Even though we can create synonym for the table which will not created previously i.e. not exist.
+The moment when we create a table with the table name then the synonym name will working as well as the previous ones.
+and these are called private synonyms;
+
+Public synonyms;
+
+>create public synonym d2 for demo;
+Error:
+insuffienct priviliges
+
+>Only super user can create or dba having the right to create.
+
+
+Views:
+
+> Views are the data base objects defined on one or more base tables 
+with the selective columns / selective rows;
+> A View is a virtual table defined on a data base with the selective rows/columns
+> A view is a window defined on a data base table using a valid query statement that provides the limited accessibility to a databaase;
+> Using views a user can execute all the dml operations based on the view definition.;
+Usage: Used for the security enforcement with selective columns/rows and the same is granted to a user instead of a complete base table;
+
+create view <view_name> as <any valid sql query>;
+SQL> create view VV_11 as select *from emp;
+
+View created.
+
+
+SQL> desc vv_11;
+ Name                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------- -------- 
+ EMPNO                                                                                     NOT NULL NUMBER(4)
+ EMPNAME                                                                                            VARCHAR2(10)
+ JOB                                                                                                VARCHAR2(9)
+ MGR                                                                                                NUMBER(4)
+ SAL                                                                                                NUMBER(7,2)
+ COMM                                                                                               NUMBER
+ DEPTNO                                                                                    NOT NULL NUMBER(2)
+ MOB                                                                                                NUMBER
+
+
+
+SQL> select *from vv_11;
+
+     EMPNO EMPNAME    JOB              MGR        SAL       COMM     DEPTNO        MOB
+---------- ---------- --------- ---------- ---------- ---------- ---------- ----------
+      7839 KING       PRESIDENT                 30700        200         10
+      7698 BLAKE      MANAGER         7839      10700        200         30
+      7782 CLARK      srmanager       7839      12700                    10
+      7566 JONES      MANAGER         7839      10700                    20
+      7654 MARTIN     SALESMAN        7698       5700       1400         30
+      7499 ALLEN      SALESMAN        7698       5700        300         30
+      7844 TURNER     SALESMAN        7698       5700          0         30
+      7900 JAMES      CLERK           7698       2700                    30
+      7521 WARD       SALESMAN        7698       5700        500         30
+      7902 FORD       ANALYST         7566      15700        200         20
+      7369 SMIT       CLERK           7902       2700                    20
+      7788 SCOTT      CLERK           7566       2700                    20
+      7876 ADAMS      CLERK           7788       2700        200         20
+      7934 MILLER     CLERK           7782       2700                    10
+      7666 JACK       CLERK           7698       2700        300         20
+      7950 BOND       ANALYST         7782      16100                    20
+
+16 rows selected.
+
+Note:
+> It is not occupy any space on the storage. It is only a imaginary table to a base table.
+> Through view also we are insert or dump values into base table.
+> 
+
+> create view vv_22 as select empno,empname,job,sal,deptno from emp where deptno=10;
+
+
+
+SQL> select *from vv_22;
+
+     EMPNO EMPNAME    JOB              SAL     DEPTNO
+---------- ---------- --------- ---------- ----------
+      7839 KING       PRESIDENT      30700         10
+      7782 CLARK      srmanager      12700         10
+      7934 MILLER     CLERK           2700         10
+Note:
+>create user <u_name> identified by <password>;
+> grant all priviliges to <u_name>;
+> connect <u_name>
+it is asking for password
+;;  this will be done by DBA only
+
+>grant on all vv_22;
+jones> desc training.vv_22;
+jones> select *from training.vv_22;
+Training> delete from vv_22;
+
+SQL> delete from vv_22;
+
+3 rows deleted.
+
+SQL> select *from vv_22;
+
+no rows selected
+
+Note:
+create view vv_33 as select empname,job,sal,deptno from emp where deptno=20;
+
+SQL> create view vv_33 as select empname,job,sal,deptno from emp where deptno=20;
+
+View created.
+
+> insert into vv_33 values('&empname','&job',&sal,&deptno);
+
+SQL> insert into vv_33 values('&empname','&job',&sal,&deptno);
+Enter value for empname: challa
+Enter value for job: developer
+Enter value for sal: 20000
+Enter value for deptno: 20
+old   1: insert into vv_33 values('&empname','&job',&sal,&deptno)
+new   1: insert into vv_33 values('challa','developer',20000,20)
+insert into vv_33 values('challa','developer',20000,20)
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("TRAINING"."EMP"."EMPNO")
+
+@@@@@@@@@@@ If a view is defined excluding not null or primary key  columns then insertion is not possible using such views.
+@@@@@@@@@@@@ And views can not be altered
+>> create view vv_44 as select *from emp,dept where emp.deptno=dept.deptno;
+
+SQL> create view vv_44 as select *from emp,dept where emp.deptno=dept.deptno;
+create view vv_44 as select *from emp,dept where emp.deptno=dept.deptno
+                            *
+ERROR at line 1:
+ORA-00957: duplicate column name
+
+Both tables have different column names then it is possible.
+
+> create view vv_44 as select d.deptno,dname,loc,empno,empname,job,mgr,sal,comm,e.deptno dno from dept d,emp e  where e.deptno=d.deptno;
+
+SQL> create view vv_44 as select d.deptno,dname,loc,empno,empname,job,mgr,sal,comm,e.deptno dno from
+ dept d,emp e  where e.deptno=d.deptno;
+
+View created.
+
+SQL> select *from vv_44;
+
+    DEPTNO DNAME          LOC                EMPNO EMPNAME    JOB              MGR        SAL       COMM        DNO
+---------- -------------- ------------- ---------- ---------- --------- ---------- ---------- ------
+        30 SALES          CHICAGO             7698 BLAKE      MANAGER         7839      10700        200         30
+        20 RESEARCH       DALLAS              7566 JONES      MANAGER         7839      10700                    20
+        30 SALES          CHICAGO             7654 MARTIN     SALESMAN        7698       5700       1400         30
+        30 SALES          CHICAGO             7499 ALLEN      SALESMAN        7698       5700        300         30
+        30 SALES          CHICAGO             7844 TURNER     SALESMAN        7698       5700          0         30
+        30 SALES          CHICAGO             7900 JAMES      CLERK           7698       2700                    30
+        30 SALES          CHICAGO             7521 WARD       SALESMAN        7698       5700        500         30
+        20 RESEARCH       DALLAS              7902 FORD       ANALYST         7566      15700        200         20
+        20 RESEARCH       DALLAS              7369 SMIT       CLERK           7902       2700                    20
+        20 RESEARCH       DALLAS              7788 SCOTT      CLERK           7566       2700                    20
+        20 RESEARCH       DALLAS              7876 ADAMS      CLERK           7788       2700        200         20
+        20 RESEARCH       DALLAS              7666 JACK       CLERK           7698       2700        300         20
+        20 RESEARCH       DALLAS              7950 BOND       ANALYST         7782      16100                    20
+
+13 rows selected.
+
+> insert into vv_44(deptno,dname,loc) values (30,'MKTG','Hyderabad');
+
+SQL> delete from VV_44;
+
+13 rows deleted.
+
+SQL> select *from emp;
+
+no rows selected
+
+SQL> rollback
+  2  ;
+
+Rollback complete.
+
+SQL> select *from emp;
+
+     EMPNO EMPNAME    JOB              MGR        SAL       COMM     DEPTNO        MOB
+---------- ---------- --------- ---------- ---------- ---------- ---------- ----------
+      7698 BLAKE      MANAGER         7839      10700        200         30
+      7566 JONES      MANAGER         7839      10700                    20
+      7654 MARTIN     SALESMAN        7698       5700       1400         30
+      7499 ALLEN      SALESMAN        7698       5700        300         30
+      7844 TURNER     SALESMAN        7698       5700          0         30
+      7900 JAMES      CLERK           7698       2700                    30
+      7521 WARD       SALESMAN        7698       5700        500         30
+      7902 FORD       ANALYST         7566      15700        200         20
+      7369 SMIT       CLERK           7902       2700                    20
+      7788 SCOTT      CLERK           7566       2700                    20
+      7876 ADAMS      CLERK           7788       2700        200         20
+      7666 JACK       CLERK           7698       2700        300         20
+      7950 BOND       ANALYST         7782      16100                    20
+
+13 rows selected.
+
+> create view vv_55 as select *from emp with read only;
+
+SQL> create view vv_55 as select *from emp with read only;
+
+View created.
+
+SQL> select *from vv_55;
+
+     EMPNO EMPNAME    JOB              MGR        SAL       COMM     DEPTNO        MOB
+---------- ---------- --------- ---------- ---------- ---------- ---------- ----------
+      7698 BLAKE      MANAGER         7839      10700        200         30
+      7566 JONES      MANAGER         7839      10700                    20
+      7654 MARTIN     SALESMAN        7698       5700       1400         30
+      7499 ALLEN      SALESMAN        7698       5700        300         30
+      7844 TURNER     SALESMAN        7698       5700          0         30
+      7900 JAMES      CLERK           7698       2700                    30
+      7521 WARD       SALESMAN        7698       5700        500         30
+      7902 FORD       ANALYST         7566      15700        200         20
+      7369 SMIT       CLERK           7902       2700                    20
+      7788 SCOTT      CLERK           7566       2700                    20
+      7876 ADAMS      CLERK           7788       2700        200         20
+      7666 JACK       CLERK           7698       2700        300         20
+      7950 BOND       ANALYST         7782      16100                    20
+
+13 rows selected.
+
+SQL> delete from vv_55;
+delete from vv_55
+            *
+ERROR at line 1:
+ORA-01752: cannot delete from view without exactly one key-preserved table
+
+
+>create view vv_66 as select *from demo11;
+
+SQL> create view vv_66 as select *from demo11;
+create view vv_66 as select *from demo11
+                                  *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+>create force view vv_77 as select *from demo11;
+
+
+SQL> create force view vv_77 as select *from demo11;
+
+Warning: View created with compilation errors.
+
+SQL> desc vv_77;
+ERROR:
+ORA-24372: invalid object for describe
+
+
+SQL> select *from vv_77;
+select *from vv_77
+             *
+ERROR at line 1:
+ORA-04063: view "TRAINING.VV_77" has errors
+
+>select *from user_views;
+SQL> desc user_views;
+ Name                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------- -------- 
+ VIEW_NAME                                                                                 NOT NULL VARCHAR2(30)
+ TEXT_LENGTH                                                                                        NUMBER
+ TEXT                                                                                               LONG
+ TYPE_TEXT_LENGTH                                                                                   NUMBER
+ TYPE_TEXT                                                                                          VARCHAR2(4000)
+ OID_TEXT_LENGTH                                                                                    NUMBER
+ OID_TEXT                                                                                           VARCHAR2(4000)
+ VIEW_TYPE_OWNER                                                                                    VARCHAR2(30)
+ VIEW_TYPE                                                                                          VARCHAR2(30)
+ SUPERVIEW_NAME                                                                                     VARCHAR2(30)
+
+>select view_name,text from user_views ;
+SQL> select view_name,text from user_views;
+
+VIEW_NAME                      TEXT
+------------------------------ ---------------------------------------------------------------------
+
+VV_22                          select empno,empname,job,sal,deptno from emp where deptno=10
+VV_33                          select empname,job,sal,deptno from emp where deptno=20
+
+> select view_name,text from user_views order by view_name;
+
+VIEW_NAME                      TEXT
+------------------------------ ---------------------------------------------------------------------
+
+VV_11                          select "EMPNO","EMPNAME","JOB","MGR","SAL","COMM","DEPTNO","MOB"from emp
+VV_22                          select empno,empname,job,sal,deptno from emp where deptno=10
+VV_33                          select empname,job,sal,deptno from emp where deptno=20
+VV_44                          select d.deptno,dname,loc,empno,empname,job,mgr,sal,comm,e.deptno dno from dept
+VV_55                          select "EMPNO","EMPNAME","JOB","MGR","SAL","COMM","DEPTNO","MOB"from emp with re
+VV_66                          select "SNO","NAME"from demo
+VV_77                          select *from demo11

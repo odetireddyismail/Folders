@@ -1,0 +1,863 @@
+Day-2:
+
+1 NF Rules:
+
+	1) There Should Not Be A Multivalued Attributes
+				
+	2) There Should not be a duplicate data/ Data Repetetion
+
+	3) Atleast one column, or combination of columns should be nominated as a primary key
+
+
+2 NF RULES:
+
+	1) IT SHOULD BE IN 1 NF
+	2) THERE SHOULD NOT BE A PARTIAL DEPENDENCY
+			
+	@NOTE:
+	IF A TABLE IS HAVING COMPOSITE PRIMARY KEY THEN ONLY WILL BE GOING FOR 
+	2 NF/ PARTIAL DEPENDENCY CHECKING
+
+3 NF RULES:
+
+				1) IT SHOULD BE IN 2 NF
+				2) THERE SHOULD NOT BE A TRANSITIVE DEPENDENCY
+
+----------------
+Data Integrity:
+----------------
+
+The following categories of the data integrity exist with each RDBMS:
+
+    Entity Integrity		: There are no duplicate rows in a table.
+
+    Domain Integrity		: Enforces valid entries for a given column by restricting the type, the format, or the range of values.
+
+    Referential Integrity	: Rows cannot be deleted, which are used by other records.
+
+    User-Defined Integrity	: Enforces some specific business rules that do not fall into entity, domain or referential integrity.
+
+---------------
+Constraints:
+---------------
+
+Following are commonly used constraints available in SQL:
+
+    NOT NULL Constraint: Ensures that a column cannot have NULL value.
+
+    DEFAULT Constraint: Provides a default value for a column when none is specified.
+
+    UNIQUE Constraint: Ensures that all values in a column are different.
+
+    PRIMARY Key: Uniquely identified each rows/records in a database table.
+
+    FOREIGN Key: Uniquely identified a rows/records in any another database table.
+
+    CHECK Constraint: The CHECK constraint ensures that all values in a column satisfy certain conditions.
+
+SESSION 3:
+
+	SELECT QUERY SYNTAX:
+
+				 SELECT
+				 FROM
+				 WHERE
+				 GROUP BY
+				 HAVING 
+				 ORDER BY
+
+	SELECT col1,col2,col3,..,etc
+	       [exp1,exp2,exp3,..etc   ]
+	
+	FROM tableName(s)
+	
+	[WHERE con1,con2,..etc ]
+	
+	[GROUP BY col1,col2,..etc]
+	
+	[HAVING con1,con2,..etc]
+
+	[ORDER BY col1,col2,..etc] ;
+
+NOTE:
+	SELECT QUERY IS A READ ONLY QUERY
+	IT DOESNT ACCUPY ANY PHYSICAL MEMORY
+	
+	
+1) SELECT * FROM emp;
+
+	Projection 
+
+2) 	SELECT 	empno,
+			ename,
+			job,
+			sal,
+			comm,
+			dno
+	FROM emp;
+
+3)	SELECT 	ename,
+		dno
+	  	job,
+	  	sal,
+		empno,
+	  	comm
+	FROM emp;
+
+4)	SELECT 	empno,
+	  	ename,
+	  	job,
+	  	sal,
+	  	comm,
+		empno,
+		job,
+		dno
+	FROM emp;
+
+5) 	SELECT 	empno,
+	  	ename,
+	  	job,
+	  	sal,
+	  	comm,
+	  	dno,
+		1000
+	FROM emp;
+
+6) 	SELECT 	empno,
+	  	ename,
+	  	sal,
+	  	comm,
+	  	dno,
+		1000,
+		1000+1500
+	FROM emp;
+
+7) 	SELECT 	empno,
+	  	ename,
+	  	sal,
+	  	comm,
+	  	dno,
+		(sal*10/100)
+	FROM emp;
+
+8) 	SELECT 	empno,
+	  	ename,
+	  	sal,
+	  	comm,
+	  	dno,
+		(sal*10/100) AS vpp
+	FROM emp;
+
+9) 	SELECT 	empno,
+	  	sal,
+	  	comm,
+	  	dno,
+		(sal*10/100) AS vpp,
+		sal+NVL(comm,0) AS "final sal"
+	FROM emp;
+
+10) SELECT 	empno,
+	  	sal,
+	  	comm,
+		(sal*10/100) AS vpp,
+		sal+NVL(comm,0) AS tsal,
+		sal+NVL(comm,0)+vpp AS "final sal"
+	FROM emp;	
+ 	
+	* THIS QUERY WONT WORK BCZ ALIAS NAMES DOES NOT HOLD ANY VALUE
+
+ NOTE: Is it possible to use Virtual Strings in The Select Query?
+		Yes it is possible to use virtual Strings in The Select Query
+
+11)	SELECT 	empno,
+	     	'working for',
+		dno,
+		'with a sal of',
+		sal,
+		'and with a comm of',
+		comm,
+		sal+NVL(comm,0) AS tsal
+	FROM emp;
+	
+12)	SELECT 	empno,
+	     	'working for' AS " ",
+		dno,
+		'with a sal of' AS " ",
+		sal,
+		'and with a comm of' AS " ",
+		comm,
+		sal+NVL(comm,0) AS tsal
+	FROM emp;
+
+>> Arthemietic operators
+
+>> RELATIONAL OPERATORS
+
+>> LOGICAL OPERATORS  
+	 AND
+   	 OR
+   	 NOT
+
+>> 	BETWEEN
+  	IN
+	LIKE
+	IS NULL
+	[ SOME, ANY,ALL
+	  IN, EXISTS, NOT EXIST ] ===> SUB QUERY OPERATORS
+		
+>>  SET OPERATORS
+	UNION
+	UNION ALL
+	INTERSECT
+	MINUS
+
+13) SELECT 	empno,
+	  	ename,
+		job,
+	  	sal,
+	  	comm,
+	  	dno
+	FROM emp 
+	WHERE sal BETWEEN 1250 AND 3975;
+	
+	BOUNDERIES WILL BE INCLUDED OR NOT?? [ YES ]
+
+14) SELECT 	empno,
+	  	ename,
+		job,
+	  	sal,
+	  	comm,
+	  	dno
+	FROM emp 
+	WHERE sal>=1250 AND sal<=3975;
+
+15) SELECT 	empno,
+	  	ename,
+		job,
+	  	sal,
+	  	comm,
+	  	dno
+	FROM emp 
+	WHERE sal NOT BETWEEN 1750 AND 2800;
+	  
+16) SELECT empno,
+	  	ename,
+		job,
+	  	sal,
+	  	comm,
+	  	dno
+	FROM emp 
+	WHERE dno=10 or dno=20;  
+
+17) SELECT empno,
+	  	ename,
+		job,
+	  	sal,
+	  	comm,
+	  	dno
+	FROM emp 
+	WHERE dno in(10,20); 
+
+18) SELECT  empno,
+	  	ename,
+		job,
+	  	sal,
+	  	comm,
+	  	dno
+	FROM emp 
+	WHERE job in('manager','analyst','SALESMAN'); 
+
+19) SELECT empno,
+	  	ename,
+		job,
+	  	sal,
+	  	comm,
+	  	dno
+	FROM emp 
+	WHERE job in('MANAGER','ANALYST','SALESMAN'); 
+	
+NOTE: 
+	1) THE VALUES WHICH WERE STORED IN THE COLUMNS ARE CASE SENSITIVE, BUT COLUMN NAMES, TABLE NAMES, SQL KEYWORDS ETC ARE NOT CASE SENSITIVE
+
+	2) YOU CAN APPLY THE OPERATORS ON ANY TYPE OF DATA
+
+20)	SELECT  empno,
+	  	ename,
+		job,
+	  	sal,
+	  	comm,
+	  	dno,
+		doj
+	FROM emp 
+	WHERE DOJ in('17-NOV-81','01-MAY-81','17-DEC-80');
+  	
+21)  SELECT *FROM emp WHERE  ename LIKE 'J%';
+22)  SELECT *FROM emp WHERE ename LIKE 'SRI%';
+23)  SELECT *FROM emp WHERE sal LIKE 1250;
+24)  SELECT *FROM emp WHERE  doj LIKE '%81';
+25)  SELECT *FROM emp WHERE  doj LIKE '%DEC%';
+
+26)SELECT empno,
+	     ename,
+		job,
+	  	sal,
+	  	comm,
+	  	dno
+	FROM emp 
+	WHERE comm=null;
+	
+	NOTE : It is not possible to compare null values in any of the RDBMS Product.
+
+	NOTE : CODD RULE : SYSTEMATIC TREATMENT OF NULL VALUES
+	
+	ORACLE : IS NULL OPERATOR
+		 NVL, NVL2 FUNCTIONS
+
+27) SELECT  empno,
+	     	ename,
+		job,
+	  	sal,
+	  	comm,
+	  	dno,
+		doj
+	FROM emp 
+	WHERE comm IS NULL;
+
+*** SET OPERATORS  *******
+
+	UNION
+	UNION ALL
+	INTERSECT
+	MINUS
+
+ NOTE:
+	1) IN THE TWO QUERIES
+			YOU NEED TO HAVE EQUAL NUMBER OF COLUMNS
+			YOU NEED TO HAVE THE DATA TYPES COMPATIBILITY 
+			
+	2) IF COLUMN NAMES ALONE DIFFERENT IN TWO QUERIES NOT A PROBLEM
+
+	3) IF THE SET OPERATORS WORK FINE, THEN IN THE RESULT, WE WILL GET THE FIRST QUERY COLUMN NAMES
+
+	IS IT POSSIBLE TO CREATE A TABLE BY USING THE EXISTING TABLE??
+		YES [Oracle,Mysql]
+		
+		>> CREATE TABLE <<TABLENAME> AS SQL_QUERY[VALID SELECT QUERY]
+		>> DDL COMMNDS ARE BY DEFAULT AUTO COMMIT IN NATURE
+		>> IF YOU WANTED TO HAVE ONLY THE TABLE STRUCUTRE ALONE??
+			CREATE TABLE DUMMY_TABLE AS
+									 SELECT * FROM emp WHERE comm=null;
+	
+28) CREATE TABLE emp_backup_1 AS SELECT *FROM emp;
+
+29) CREATE TABLE emp_backup_11 AS SELECT empno,ename,job,dno FROM emp WHERE dno=10;
+
+30) CREATE TABLE emp_backup_12 AS SELECT empno,ename,job,dno FROM emp WHERE dno=20;
+
+31) CREATE TABLE emp_backup_13 AS SELECT empno,ename,job,dno FROM emp WHERE dno=10;
+
+32) SELECT * FROM emp_backup_11 
+	UNION
+    SELECT * FROM emp_backup_12;
+
+33) SELECT * FROM emp_backup_11 
+	UNION
+    SELECT * FROM emp_backup_12
+	UNION
+    SELECT * FROM emp_backup_13;
+
+34) SELECT * FROM emp_backup_11 
+	UNION ALL
+    SELECT * FROM emp_backup_12
+	UNION ALL
+    SELECT * FROM emp_backup_13;
+
+35) SELECT * FROM emp
+	INTERSECT
+    SELECT *FROM emp_backup_13; // it wont work
+
+36) SELECT empno,dno,job,dno FROM emp
+	INTERSECT
+    SELECT *FROM emp_backup_13; // it wont work because data type mismatch between corresponding columns
+	
+	SELECT empno,ename,job,dno FROM emp
+	INTERSECT
+    SELECT *FROM emp_backup_13;
+
+37) SELECT empno,ename,job,dno FROM emp
+	MINUS
+    SELECT *FROM emp_backup_13;
+
+Aggregate Functions:
+
+		MIN
+		MAX
+		COUNT(COLUMNAME)
+		COUNT(*)
+		SUM
+		AVG
+
+38) SELECT SUM(sal),
+		AVG(sal),
+		MIN(sal),
+		MAX(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp;
+
+39) SELECT	SUM(sal),
+		AVG(sal),
+		MIN(sal),
+		MAX(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp
+	WHERE dno=10;
+
+40) SELECT	SUM(sal),
+		AVG(sal),
+		MIN(sal),
+		MAX(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp
+	GROUP BY dno;
+
+41) SELECT	dno,
+		SUM(sal),
+		AVG(sal),
+		MIN(sal),
+		MAX(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp
+	GROUP BY dno;
+
+42) SELECT	dno,
+		SUM(sal),
+		AVG(sal),
+		MIN(sal),
+		MAX(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp
+	WHERE dno in(10,20)
+	GROUP BY dno;
+
+43)	SELECT dno,job,
+		SUM(sal),
+		AVG(sal),
+		MIN(sal),
+		MAX(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp
+	WHERE dno in(10,20)
+	GROUP BY dno;
+
+	NOTE:
+		IF YOU WANT TO DISPLAY NON AGGREGATE COLUMNS IN SELECT LIST,
+		THEN THOSE COLUMNS SHOULD BE INCLUDED IN THE GROUP BY LIST AS WELL
+
+		
+
+44)	SELECT	dno,job,
+		SUM(sal),
+		AVG(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp
+	WHERE dno in(10,20)
+	GROUP BY dno,job;
+
+45)  SELECT	dno,job,
+		SUM(sal),
+		AVG(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp
+	WHERE dno in(10,20)
+	GROUP BY dno,job;
+
+46) SELECT	dno,job,
+		SUM(sal),
+		AVG(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp
+	GROUP BY dno,job HAVING SUM(sal)>4500;
+
+47) SELECT	dno,job,
+		SUM(sal),
+		AVG(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp 
+	WHERE job in('SALESMAN','MANAGER')
+	GROUP BY dno,job HAVING SUM(sal)>4500;
+
+48) SELECT	dno,job,
+		SUM(sal),
+		AVG(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp 
+	WHERE job in('SALESMAN','MANAGER')
+	GROUP BY dno,job HAVING COUNT(*)>2;
+
+49) SELECT	dno,job,
+		SUM(sal),
+		AVG(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp 
+	GROUP BY dno,job HAVING COUNT(*)>1 
+	ORDER BY dno;
+
+50) SELECT	dno,job,
+		SUM(sal),
+		AVG(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp 
+	GROUP BY dno,job HAVING COUNT(*)>1 
+	ORDER BY dno desc,job;
+
+51) SELECT	dno,job,
+		SUM(sal),
+		AVG(sal),
+		COUNT(*),
+		COUNT(comm)
+	FROM emp 
+	GROUP BY dno,job HAVING COUNT(*)>1 
+	ORDER BY 1 desc,2;
+
+
+
+-------------------------------------------------------------------------------------------
+Day-4 :
+
+	1) Joins
+	2) Functions
+	3) Sub Queries
+
+	I WANT TO GET DATA FROM MULTIPLE TABLES
+		1) BY USING SET OPERATORS
+			>> EQUAL NUMBER OF COLUMNS IN THE TWO SELECT QUERIES
+			>> DATA TYPES SHOULD BE MATCH
+
+		2) JOINS
+			VERTICALLY FRAGEMENTED TABLES
+			
+			SQL>> SELECT *FROM EMP,DEPT;
+				CARTESIAN PRODUCT
+
+				EMP 	: 14 ROWS	8 COLUMNS
+				DEPT	: 4 ROWS	3 COLUMNS
+				
+				M*N ROWS
+				14*4=56 ROWS
+				X1+X2 NUMBER OF COLUMNS
+				8+3=11 COLUMNS
+				I WANT TO GET REQUIRED ROWS(DATA) FROM THE CARTESIAN PRODUCT
+				IN THE SELECT QUERIES WHERE CLAUSE U NEED TO FRAME A CONDITION
+				
+	>> JOIN IS NOTHING BUT A CONDITION OR PREDICATE
+	   WHICH WE ARE USING INSIDE OF SELECT QUERY'S WHERE CLAUSE
+	   IN ORDER TO GET THE ASSOCIATED ROWS FROM THE
+	   CARTESIAN PRODUCT
+			
+
+1) SELECT empno,
+	  ename,
+	  dept.dno,
+	  emp.dno,
+	  dname,
+	  loc
+  FROM emp,dept
+  WHERE emp.dno=dept.dno;
+
+2) SELECT empno,
+	  ename,
+	  job,
+	  e.dno,
+	  dname
+  FROM emp e,dept d
+  WHERE e.dno=d.dno;
+
+3) SELECT empno,
+	  ename,
+	  job,
+	  e.dno,
+	  dname
+  FROM emp e,dept d
+  WHERE e.dno=d.dno AND job IN('SALESMAN','ANALYST');
+
+4) SELECT e.dno,
+	  dname,
+	 count(*)
+   FROM emp e,dept d
+   WHERE e.dno=d.dno AND job IN('SALESMAN','ANALYST')
+   GROUP BY e.dno,dname
+   HAVING count(*)>1
+   ORDER BY e.dno;
+
+5) SELECT e.dno,
+	  job,
+	  count(*)
+   FROM emp e,dept d
+   WHERE e.dno=d.dno 
+   GROUP BY e.dno,job
+   ORDER BY e.dno;
+
+6) SELECT e.dno,
+	  job,
+	  count(*)
+   FROM emp e,dept d
+   WHERE e.dno=d.dno AND loc IN ('DALLAS','CHICAGO')
+   GROUP BY e.dno,job
+   ORDER BY e.dno;
+
+7) SELECT e.dno,
+	  job,
+	  count(*)
+   FROM emp e,dept d
+   WHERE e.dno=d.dno AND loc IN ('DALLAS','CHICAGO')
+   GROUP BY e.dno,job
+   HAVING COUNT(*)>1
+   ORDER BY e.dno;
+
+NOTE:
+	1) IF YOU WANT TO COMBINE OR GET THE DATA OF N NUMBER TABLES
+	   THEN U NEED N-1 JOIN CONDITIONS
+
+	2) SIMPLE JOIN
+
+		>> EQUI JOIN
+				IF A JOIN CONDITION IS BASED ON = SYMBOL
+		>> NON EQUI JOIN
+				OTHER THAN = SYMBOL
+	3) SELF JOIN
+
+		>> IF A JOIN CONDITON IS BASED ON ITS OWN TABLE THEN IT IS SAID TO BE A SELF JOIN.
+
+		>>  I want to display employee's who are all earning more than their respective boss salary?
+
+					SELECT e.empno,
+					       e.ename,
+					       e.sal,
+					       b.empno,
+					       b.sal
+					FROM emp e,emp b 
+					WHERE e.mgr=b.empno
+					AND e.sal>b.sal; 
+
+	>> SELECT e.empno AS eno,
+		  	e.ename AS name,
+			e.sal	AS esal,
+			b.empno	AS beno,
+			b.sal	AS bsal
+	   FROM emp e,emp b 
+	   WHERE e.mgr=b.empno
+	   AND e.sal>b.sal; 
+
+	Find the list of all the employee's from emp table 
+whose salary is >jones salary?
+
+>>	SELECT e.empno,
+		e.ename,
+		e.sal AS esal,
+		j.sal AS jsal,
+		e.dno
+	FROM emp e,
+	     emp j
+	WHERE j.ename='JONES' AND e.sal>j.sal;
+
+>> 	SELECT e.empno,
+		e.ename,
+		e.sal AS esal,
+		j.sal AS jsal,
+		e.dno
+	FROM emp e,
+	     emp j
+	WHERE j.ename='JONES' AND e.sal>j.sal AND e.dno IN(10,20);	
+
+	4) OUTER JOIN
+
+		>> LEFT OUTER JOIN
+		>> RIGHT OUTER JOIN
+		>> FULL OUTER JOIN
+
+1) SELECT 	empno,
+	 	ename,
+		e.dno,
+		d.dno,
+		dname
+   FROM emp e,dept d
+   WHERE e.dno=d.dno;
+
+2) SELECT 	empno,
+	 	ename,
+		e.dno,
+		d.dno,
+		dname
+   FROM emp e,dept d
+   WHERE e.dno(+)=d.dno;
+
+3) SELECT 	empno,
+	 	ename,
+		e.dno,
+		d.dno,
+		dname
+   FROM emp e,dept d
+   WHERE e.dno=d.dno(+);
+
+4) (SELECT 	empno,
+	 	ename,
+		e.dno,
+		d.dno,
+		dname
+   FROM emp e,dept d
+   WHERE e.dno(+)=d.dno)
+	UNION
+  (SELECT 	empno,
+	 	ename,
+		e.dno,
+		d.dno,
+		dname
+   FROM emp e,dept d
+   WHERE e.dno=d.dno(+));
+
+
+
+PROBLEM STMT;
+-----------------------------------------------------			
+DDL :
+	
+CREATE TABLE accounts(acc_no VARCHAR2(10) PRIMARY KEY,
+		      amount NUMBER(5),
+		      cdate  DATE);
+
+
+CREATE TABLE loans(loan_no VARCHAR2(10) PRIMARY KEY,
+			acc_no VARCHAR(10),
+			loan_amt NUMBER(5));
+
+INSERT INTO accounts VALUES('A001',456,'02-JAN-2012');
+
+INSERT INTO accounts VALUES('A002',356,'03-FEB-2012');
+
+INSERT INTO accounts VALUES('A003',2456,'03-JAN-2012');
+
+INSERT INTO accounts VALUES('A004',3456,'02-MAR-2012');
+
+INSERT INTO accounts VALUES('A005',4560,'07-DEC-2012');
+
+
+INSERT INTO loans VALUES('L001','A001',4523);
+INSERT INTO loans VALUES('L002','B001',2523);
+INSERT INTO loans VALUES('L003','B002',6523);
+INSERT INTO loans VALUES('L004','A002',1523);
+INSERT INTO loans VALUES('L005','A003',4523);
+COMMIT;
+
+-------------------------------------------------------------
+1) SELECT a.acc_no,
+    	amount,
+	cdate,
+	loan_no,
+	loan_amt
+FROM accounts a,loans l
+WHERE a.acc_no=l.acc_no;	
+
+OUTER JOIN:
+
+2) SELECT a.acc_no,
+    	amount,
+	cdate,
+	loan_no,
+	l.acc_no,
+	loan_amt
+FROM accounts a,loans l
+WHERE a.acc_no=l.acc_no(+);
+
+>> SELECT a.acc_no,
+    	amount,
+	cdate,
+	loan_no,
+	l.acc_no,
+	loan_amt
+   FROM accounts a
+   LEFT OUTER JOIN loans l
+   ON (a.acc_no=l.acc_no);
+
+
+
+3) SELECT a.acc_no,
+    	amount,
+	cdate,
+	loan_no,
+	l.acc_no,
+	loan_amt
+FROM accounts a,loans l
+WHERE a.acc_no(+)=l.acc_no;
+
+>> SELECT a.acc_no,
+    	amount,
+	cdate,
+	loan_no,
+	l.acc_no,
+	loan_amt
+   FROM accounts a
+   RIGHT OUTER JOIN loans l
+   ON (a.acc_no=l.acc_no);
+   
+>> FULL OUTER JOIN
+
+ 
+4) (SELECT a.acc_no,
+    	amount,
+	cdate,
+	loan_no,
+	l.acc_no,
+	loan_amt
+FROM accounts a,loans l
+WHERE a.acc_no=l.acc_no(+))
+ UNION
+(SELECT a.acc_no,
+    	amount,
+	cdate,
+	loan_no,
+	l.acc_no,
+	loan_amt
+FROM accounts a,loans l
+WHERE a.acc_no(+)=l.acc_no);
+
+>> SELECT a.acc_no,
+    	amount,
+	cdate,
+	loan_no,
+	l.acc_no,
+	loan_amt
+   FROM accounts a
+   FULL OUTER JOIN loans l
+   ON (a.acc_no=l.acc_no);
+
+
+1) The result of outer query we are using for
+ condition checking in the inner query
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
