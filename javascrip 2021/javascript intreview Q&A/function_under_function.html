@@ -1,0 +1,31 @@
+<script>
+    var aa=function(a,b){
+    return a+b;
+}
+console.log(aa(4,4))
+
+</script>
+
+<script>
+
+var dd = function(fx,a,b){
+     return gg(a,b);
+}
+var gg = function(a,b){
+    return a+b;
+}
+console.log(dd(gg,5,5))
+</script>
+ 
+<script>
+
+    let sum=function(a){    
+        return function(b){
+            if(b){
+                return sum(a+b);
+            }
+            return a;
+        }
+    }
+    console.log(sum(1)(2)(3)(4)());
+</script>
