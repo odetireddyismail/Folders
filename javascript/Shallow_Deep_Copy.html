@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Shallow And Deep Copy
+    </title>
+</head>
+
+<body>
+
+    <script>
+    /*Shallow Copy
+    */
+    //  var a1={
+    //     name:'reddy ismail'
+    //  }
+     
+    //  const a2={...a1}
+    //  a2.name='Basha'
+
+
+
+    //  console.log(a1)
+    //  console.log(a2)
+
+    /*Deep copy*/
+
+
+
+     var a1={
+        name:'reddy ismail',
+
+        add:{
+            age:33
+        }
+     }
+
+    //  const ne=JSON.parse(JSON.stringify(a1))
+
+    const ne=_.CloneDeep(a1);
+
+    
+     ne.add.age=50
+     console.log(a1)
+
+     //console.log(ne.add.age)
+
+     console.log(ne)
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		div {
+			color: white;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+		h2 {
+			color: black;
+		}
+		#grandparent {
+			background-color: green;
+			width: 300px;
+			height: 300px;
+		}
+		#parent {
+			background-color: blue;
+			width: 200px;
+			height: 200px;
+		}
+		#child {
+			background-color: red;
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h2>Welcome To GFG</h2>
+		<div id="grandparent" >GrandParent
+			<div id="parent">Parent
+				<div id="child" > Child</div>
+			</div>
+		</div>
+	</div>
+<script>
+    var gra=document.getElementById('grandparent');
+    var pa=document.getElementById('parent');
+    var chi=document.getElementById('child');
+
+    gra.addEventListener('click',(e)=>{
+        console.log('gra')
+    },{capture:false});
+    pa.addEventListener('click',(e)=>{
+        console.log('pa')
+    },{capture:false});
+    chi.addEventListener('click',(e)=>{
+        console.log('chi')
+    },{capture:false});
+
+</script>
+	
+    
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<html>
+<body>
+<script type="text/javascript" >  
+function showcommentform() {  
+var data="Name:<br><input type='text' name='name'><br>Comment:<br><textarea rows='5' cols='50'></textarea><br><input type='submit' value='comment'>";  
+ var da=document.getElementById("ra");
+ da.innerHTML=data;
+ da.style.color="red";
+ da.style.backgroundColor="red";
+ da.width="auto";
+ da.alignitems="center";
+ 
+
+ }  
+  
+</script>  
+<form name="myForm">  
+<input type="button" value="comment" onclick="showcommentform()">  
+  <div id="ra"></div>
+</form>  
+</body>
+</html>

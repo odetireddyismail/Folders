@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <title>Array_Object</title>
+       <script>
+           function ismail(){
+            const fname=document.getElementById('name').value;
+           const psw=document.getElementById('password').value;
+            const lab=document.getElementById('label');
+           if(fname==""){
+                lab.innerHTML="please fill"; 
+                return false
+                //alert("hallow")  
+           }
+           if(psw==""){
+                lab.innerHTML="please fill"   
+                return false
+           }
+           else{
+                 const data={fname,psw}
+                 ismail1(data);
+                     
+              // console.log(data)
+               return false
+           }
+           }
+
+           function ismail1(data){
+              const da=new Date()
+           console.log(da);
+           }
+
+       </script>
+   </head>
+   <body>
+       <div>
+          <form onsubmit=" return ismail()">
+            
+                <label ><b>Username</b></label>
+                <input type="text"   id="name" name="uname"><br>
+                <span id="label"></span><br>
+                <label ><b>Password</b></label>
+                <input type="email"   id="password" name="Email"><br>
+                <span id="label"></span><br>
+          
+                <input type="submit" value="submit" name="submit"></input>
+                
+
+          </form>
+       </div>
+   </body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Js_Tricks</title>
+        <meta />
+    </head>
+    <body>
+        <script>
+            function _Ismail(){
+                // if(1>2){
+                //     console('true')
+                // }
+                // else{
+                //     console.log('false')
+                // }
+                1>2 ?console.log('true'):console.log('false')
+            }
+
+
+
+            const _Is=()=>{
+                let _A=[1,1,1,2,2,3,4,5,6,7,8];
+                let _new=new Set([..._A])
+
+                console.log({_new})
+            }
+
+            const _String=()=>{
+              
+               const num= 1 +''+'hallow ';
+
+               console.log(typeof(num))
+
+               console.log(num)
+            }
+
+            const _Num=()=>{
+                const na='812346'
+                console.log(typeof na)
+                console.log(typeof + na)
+                console.log(typeof na)
+                console.log(`hallow world this is number ${na}`)
+            } 
+            
+        </script>
+        <button onClick="_Ismail()">Button</button>
+        <button onClick="_Is()">New_Set</button>
+        <button onClick="_String()">Convert_String</button>
+        <button onClick="_Num()">Convert_String_NUm</button>
+    </body>
+</html>

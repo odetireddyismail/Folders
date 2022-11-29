@@ -1,0 +1,66 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+.box{
+    width: 700px;
+    height: 400px;
+    background-color: rgb(209, 71, 71);
+    margin:10% auto;
+    position: relative;
+    border-radius: 20px ;
+    overflow: hidden;
+}
+.box span{
+    background:url("D:/images/1437603.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    position:absolute;
+    height:100%;
+    left:0;
+    transition: 1s;
+}
+
+
+.box span:nth-child(1){
+  width:25%;
+  z-index: 10;
+  transition-delay:0s;
+
+  
+}
+.box:hover span{
+transform:translateY(-100%);
+transition:1s;
+
+}
+.box span:nth-child(2){
+    width:50%;
+    z-index: 9;
+    transition-delay:0.3s;
+   
+}
+.box span:nth-child(3){
+    width:75%;
+    z-index: 8;
+    transition-delay:0.6s;
+}
+.box span:nth-child(4){
+    width:100%;
+    z-index: 7;
+    transition-delay:0.8s;
+}
+.box:hover span:nth-child(1){
+    transition-delay:0.6s; 
+}
+.box:hover span:nth-child(2){
+    transition-delay:0.4s; 
+}
+.box:hover span:nth-child(3){
+    transition-delay:0.2s; 
+}
+.box:hover span:nth-child(4){
+    transition-delay:0s; 
+}
+
+

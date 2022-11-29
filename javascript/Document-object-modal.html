@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Window-object
+        </title>
+    </head>
+    <body>
+    <!--
+         <script>
+         function msg(){
+             var name=document.form1.text1.value;
+             alert("welcome"+ " " +name);                                                                                                                    
+         }
+     </script>   
+           <form name="form1">
+            <input type="text" name="text1"></input>
+            <input type="button" onclick="msg()" value="click"></input>
+           </form>  
+
+     <div>
+        <script>
+            function msg1(){
+                var name=document.getElementById('text1').value;
+                alert("welcome"+ " " +name);                                                                                                                    
+            }
+        </script>   
+              <form >
+               <input type="text" id="text1"></input>
+               <input type="button" onclick="msg1()" value="click"></input>
+              </form> 
+    --> 
+    <!-- Finding the lenghth of particular TAG-->
+    
+
+    <script type="text/javascript">  
+        function countpara(){  
+        var totalpara=document.getElementsByTagName("p");  
+        alert("total p tags are: "+totalpara.length);  
+          
+        }  
+        </script>  
+        <p>This is a pragraph</p>  
+        <p>Here we are going to count total number of paragraphs by getElementByTagName() method.</p>  
+        <p>Let's see the simple example</p>  
+        <button onclick="countpara()">count paragraph</button>
+     </div>
+    </body>
+</html>
