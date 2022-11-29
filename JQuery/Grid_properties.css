@@ -1,0 +1,103 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+   
+}
+body{
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+}
+@media(min-width:1400px){
+    .grid_container{
+   
+        display: grid;
+        grid-template-areas: 'header header header header'
+        'aside body1 body1 body1'
+        'footer footer footer footer';
+        background: rgb(244, 117, 117);
+    }
+    
+    .header{
+        grid-area:header;
+        background: rgb(182, 165, 49);
+    }
+    .aside{
+        grid-area: aside;
+        background: rgb(31, 103, 197);
+    }
+    .body{
+        grid-area: body1;
+        color: white;
+        background: rgb(30, 13, 13);
+    
+    }
+    .footer{
+        grid-area: footer;
+        background: rgb(18, 157, 71);
+    }
+    
+}
+@media(min-width:786px) and (max-width:1199px){
+    .grid_container{
+   
+        display: grid;
+        grid-template-areas: 'footer footer footer footer'
+        'aside body1 body1 body1'
+        'header header header header';
+        background: rgb(244, 117, 117);
+
+    }
+    
+    .header{
+        grid-area:header;
+        background: rgb(182, 165, 49);
+    }
+    .aside{
+        grid-area: aside;
+        background: rgb(31, 103, 197);
+    }
+    .body{
+        grid-area: body1;
+        background: rgb(30, 13, 13);
+    
+    }
+    .footer{
+        grid-area: footer;
+        background: rgb(18, 157, 71);
+    }
+    
+}
+@media(min-width:420px) and (max-width:785px){
+    .grid_container{
+  
+        display: grid;
+        grid-template-areas: 'footer footer footer footer'
+        'body1 body1 body1 body1'
+        'aside aside aside aside'
+        'header header header header';
+        background: rgb(244, 117, 117);
+
+    }
+    
+    .header{
+        grid-area:header;
+        background: rgb(182, 165, 49);
+    }
+    .aside{
+        grid-area: aside;
+        background: rgb(31, 103, 197);
+    }
+    .body{
+        grid-area: body1;
+        color: aliceblue;
+        background: rgb(30, 13, 13);
+    
+    }
+    .footer{
+        grid-area: footer;
+        background: rgb(18, 157, 71);
+    }
+    
+}

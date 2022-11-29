@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width,  initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link href="layout.css" rel="stylesheet">
+    </link>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+
+    
+</head>
+
+<body>
+
+    <div id="container">
+
+    </div>
+
+    <div id="productdetailsdummy" style="display:none;">
+        <div class="pa">
+            <div class="im">
+                <img class="prodImage" src="" alt="" />
+            </div>
+            <div class="text">
+                <span><i class="fa fa-heart" ></i></span>
+                <h2 class="prodName"></h2>
+                <div class="price">
+                    <span>$ : </span><span class="prodPrice"></span>
+                </div>
+                <p class="prodDesc"></p>
+                <div class="star">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+                <div>
+                    <button>Add To Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="pare">
+          <div class="im">
+           The interviewer was very friendly. He asked me whether I was feeling good.
+He introduced himself first then he asked me to introduce myself.
+First, he asked basic coding questions which were on strings, it was quite easy
+later he asked a question about files, on efficient retrieval of data from files I don’t remember the exact question, he said there is only one operation we can perform that is inserted at the end, you have to say if there are changes in the file or not in an efficient manner
+later he asked oops questions on java
+DBMS questions which you can easily find from javatpoint, most of the questions were asked from javatpoint itself.
+          </div>
+          <div class="text">
+
+          </div>
+        </div> -->
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "https://dummyjson.com/products",
+            method: "GET",
+            success: function (data) {
+                parseProducts(data);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+        // create product html
+        function buildProductHTML(productdata) {
+            $("#productdetailsdummy .prodImage").attr("src", productdata.images[0]).attr("alt", productdata.title);
+            $("#productdetailsdummy .prodName").text(productdata.title);
+            $("#productdetailsdummy .prodPrice").text(productdata.price);
+            $("#productdetailsdummy .prodDesc").text(productdata.description);
+            var prodHTML = $("#productdetailsdummy").html()
+
+            return prodHTML;
+        }
+        //read products data and call create product html function and append to html 
+        function parseProducts(productsdata) {
+            $.each(productsdata.products, function (i, product) {
+                var prodHTML = buildProductHTML(product);
+                $("#container").append(prodHTML);
+            });
+        }
+
+    });
+</script>
+
+</html>
